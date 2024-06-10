@@ -40,7 +40,11 @@ module.exports = {
               ]
             },
             '@apostrophecms/image': {},
-            '@apostrophecms/video': {}
+            '@apostrophecms/video': {},
+            'image-gallery': {},
+            'columns': {},
+            'side-by-side': {},
+            'accordion': {}
           }
         }
       }
