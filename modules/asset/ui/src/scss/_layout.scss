@@ -21,10 +21,11 @@ body {
 .bp-header,
 main,
 .bp-footer {
+  position: relative;
+  max-width: 1250px;
   width: 100%;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 .bp-header {
@@ -37,7 +38,7 @@ main,
 }
 
 .bp-footer {
-  padding: 40px 0; 
+  padding: 40px 0;
 }
 
 .bp-footer__links {

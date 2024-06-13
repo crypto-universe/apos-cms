@@ -1,0 +1,23 @@
+<section data-faq-widget>
+    <section class="faq flex">
+        <span class="bg7"></span>
+        <div class="faq__lefts">
+            <h2 class="main-title our-client__main-title faq__main-title">{{ data.widget.title }}</h2>
+        </div>
+        <div class="faq__wrap">
+            {% for faq in data.widget.faqs %}
+            <div class="faq__item">
+        <span class="faq__guest flex-c">
+          {{ faq.question }}
+          <svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L10.8235 11L20 2" stroke="#EEEEEE" stroke-width="3"/>
+          </svg>
+        </span>
+                <div class="faq__answer" style="display: none;">
+                    <p>{{ faq.answer | safe }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</section>

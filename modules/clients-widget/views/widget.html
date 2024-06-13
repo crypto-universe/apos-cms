@@ -1,0 +1,23 @@
+<section data-clients-widget>
+    <section class="clients flex">
+        <div class="clients__lefts">
+            <h3 class="main-title our-client__main-title clients__main-title">{{ data.widget.title }}</h3>
+        </div>
+        <div class="clients__list">
+            <ul class="clients__card swiper list-reset">
+                <div class="swiper-wrapper clients__grid">
+                    {% for client in data.widget.clients %}
+                    <a href="{{ client.url }}" target="_blank">
+                        <li class="clients__item swiper-slide">
+              <span class="clients__image">
+                <img src="{{ apos.attachment.url(client.image) }}" alt="{{ client.name }}">
+              </span>
+                            <span class="clients__name">{{ client.name }}</span>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </div>
+            </ul>
+        </div>
+    </section>
+</section>

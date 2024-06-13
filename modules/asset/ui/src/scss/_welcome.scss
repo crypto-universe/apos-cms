@@ -93,3 +93,26 @@ p.bp-welcome__cta {
   border-radius: 6px;
   box-shadow: inset 0 -1px 0 black;
 }
+
+.description {
+  max-width: 391px;
+  margin-bottom: 30px;
+  line-height: 1.45;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.url {
+  font-weight: 300;
+  color: rgba(255, 255, 255, .95);
+  line-height: 16px;
+  border-bottom: 1px solid currentColor;
+  -webkit-transition: border-color .4s ease-in-out;
+  transition: border-color .4s ease-in-out;
+}
+
+.url:hover {
+  color: #778bfd;
+  -webkit-transition: color .4s ease-in-out;
+  transition: color .4s ease-in-out;
+}

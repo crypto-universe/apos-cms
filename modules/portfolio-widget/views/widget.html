@@ -1,0 +1,34 @@
+{% import 'button-arrows.html' as buttonArrows %}
+
+<section data-aos="{{ data.widget.animationEffects }}" class="image-gallery">
+
+    <div class="swiper image-gallery__swiper" id="imageGallery" data-image-gallery data-slides="{{ data.widget.displayType}}">
+        <div class="swiper-wrapper" itemscope itemtype="http://schema.org/ImageGallery">
+            {% for image in data.widget.portfolioItems %}
+            {% set background = apos.image.first(image) %}
+
+            <div id="{{ image._id }}" class="swiper-slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                <div
+                        itemprop="contentUrl"
+                        class="image-gallery__{{ background.extension }}"
+                >
+                    <img
+                            src="{{ apos.attachment.url(background, {size: 'full' }) }}"
+                            alt="{{ background.title }}"
+                            itemprop="thumbnail"
+                            class="img-fluid"
+                    />
+                    <div class="portfolio-details">
+                        <h3>{{ image.title }}</h3>
+                        <p>{{ image.description }}</p>
+                        <span class="price">{{ image.price }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% render buttonArrows.swiper() %}
+    </div>
+
+</section>

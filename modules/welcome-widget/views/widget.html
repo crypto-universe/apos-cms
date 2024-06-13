@@ -1,0 +1,13 @@
+<section data-welcome-widget>
+    <div class="welcome">
+        <span class="bg1"></span>
+        <span class="bg2"></span>
+        <div class="container">
+            <h1 class="header__title">{{ data.widget.title }}</h1>
+            <div class="header__descr">
+                {% area data.widget, 'description' %}
+            </div>
+            <a href="{{ data.widget.buttonLink }}" class="header__btn scroll">{{ data.widget.buttonText }}</a>
+        </div>
+    </div>
+</section>

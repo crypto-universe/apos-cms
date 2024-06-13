@@ -51,6 +51,12 @@ require('apostrophe')({
     'side-by-side-widget': {},
     'image-gallery-widget': {},
     'accordion-widget': {},
+    'portfolio-widget':{},
+    'welcome-widget':{},
+    'clients-widget':{},
+    'custom-text-widget': {},
+    'faq-widget': {},
+    'navigation': {},
     '@apostrophecms/admin-bar': {
       options: {
         addGroups: [

@@ -1,48 +1,259 @@
 {#
-  This is an example home page template. It inherits and extends a layout template
-  that lives in the top-level views/ folder for convenience
+This is an example home page template. It inherits and extends a layout template
+that lives in the top-level views/ folder for convenience
 #}
 
 {% extends "layout.html" %}
 
 {% block main %}
-  <section class="bp-welcome">
-    <h1 class="bp-welcome__headline">
-      Welcome to Apostrophe 3
-    </h1>
-    {% if not data.user %}
-      {# Message only for logged out users. #}
-      <h3 class="bp-welcome__help">First time spinning up the ApostropheCMS 3 demo?</h3>
-      <p>
-        Use the credentials created during setup with the CLI tool or create a new user with the CLI command:
-      </p>
-      <pre class="bp-welcome__code">
-        <span class="bp-welcome__code__context">Command Line</span>
-        <code>
-          node app @apostrophecms/user:add myUsername admin
-        </code>
-      </pre>
-      <p class="bp-welcome__cta">
-        <a class="bp-button bp-button--cta" href="/login">Then log in here</a>
-      </p>
-    {% endif %}
-    <p>
-      For a guide on how to configure and customize this project, <a href="https://a3.docs.apostrophecms.com/">please check out the Apostrophe 3 documentation</a>.
-    </p>
-    <div class="bp-welcome__area">
-      {% if data.user %}
-        {# Message only for logged in users. #}
-        {% if not data.query['apos-edit'] %}
+{% area data.page, 'main' %}
+<!--  <section class="bp-welcome">-->
+<!--    <h1 class="bp-welcome__headline">-->
+<!--      Welcome to Apostrophe 3-->
+<!--    </h1>-->
+<!--    {% if not data.user %}-->
+<!--      {# Message only for logged out users. #}-->
+<!--      <h3 class="bp-welcome__help">First time spinning up the ApostropheCMS 3 demo?</h3>-->
+<!--      <p>-->
+<!--        Use the credentials created during setup with the CLI tool or create a new user with the CLI command:-->
+<!--      </p>-->
+<!--      <pre class="bp-welcome__code">-->
+<!--        <span class="bp-welcome__code__context">Command Line</span>-->
+<!--        <code>-->
+<!--          node app @apostrophecms/user:add myUsername admin-->
+<!--        </code>-->
+<!--      </pre>-->
+<!--      <p class="bp-welcome__cta">-->
+<!--        <a class="bp-button bp-button&#45;&#45;cta" href="/login">Then log in here</a>-->
+<!--      </p>-->
+<!--    {% endif %}-->
+<!--    <p>-->
+<!--      For a guide on how to configure and customize this project, <a href="https://a3.docs.apostrophecms.com/">please check out the Apostrophe 3 documentation</a>.-->
+<!--    </p>-->
+<!--    <div class="bp-welcome__area">-->
+<!--      {% if data.user %}-->
+<!--        {# Message only for logged in users. #}-->
+<!--        {% if not data.query['apos-edit'] %}-->
+<!--          <p>-->
+<!--            Enter <span class="bp-mode">Edit</span> mode from the admin bar <span style="display:inline-block; transform: rotate(45deg)">👆</span> to begin.-->
+<!--          </p>-->
+<!--        {% else %}-->
+<!--          <p>-->
+<!--            Add and edit content below in the content area. 👇-->
+<!--          </p>-->
+<!--        {% endif %}-->
+<!--      {% endif %}-->
+<!--      {% area data.page, 'main' %}-->
+<!--    </div>-->
+<!--  </section>-->
+<div class="container">
+
+<!--  <section class="our-client flex">-->
+<!--    <div class="our-client__left">-->
+<!--      <h2 class="main-title our-client__main-title">ПОЧЕМУ МЫ</h2>-->
+<!--      <div class="description">-->
+<!--        <p>8 лет мы разрабатываем проекты для наших заказчиков. Работаем с душой, постоянно развиваемся и улучшаем свои навыки.</p>-->
+<!--      </div>-->
+<!--      <a href="/about" class="callback our-client__btn our-client__btn_pc">ПОДРОБНЕЕ О СТУДИИ</a>-->
+<!--    </div>-->
+<!--    <ul class="our-client__item2 list-reset">-->
+<!--      <li class="our-client__card-item">-->
+<!--        <article class="our-client__card-article">-->
+<!--          <h3 class="our-client__card-title">Выгодное сотрудничество</h3>-->
+<!--          <p class="our-client__card-descr">Работаем по договору с юридическими и физическими лицами. <a class="url" href="/promotions/bonuses">Скидки для клиентов</a></p>-->
+<!--        </article>-->
+<!--      </li>-->
+<!--      <li class="our-client__card-item">-->
+<!--        <article class="our-client__card-article">-->
+<!--          <h3 class="our-client__card-title">Внимание к деталям</h3>-->
+<!--          <p class="our-client__card-descr"><a class="url" href="/services-sites/">Разработка сайтов</a> эталонной структуры, навигацией и компоновкой блоков</p>-->
+<!--        </article>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <ul class="our-client__item3 list-reset">-->
+<!--      <li class="our-client__card-item">-->
+<!--        <article class="our-client__card-article">-->
+<!--          <h3 class="our-client__card-title">Техническая поддержка</h3>-->
+<!--          <p class="our-client__card-descr"><a class="url" href="/about">Агенсио</a> занимается поддержкой разработанных сайтов и <a class="url" href="/services/mobile-application/">приложений</a></p>-->
+<!--        </article>-->
+<!--      </li>-->
+<!--      <li class="our-client__card-item">-->
+<!--        <article class="our-client__card-article">-->
+<!--          <h3 class="our-client__card-title">Стандарты разработки</h3>-->
+<!--          <p class="our-client__card-descr"><a class="url" href="/additional/technical-document/">Создаем</a>, контролируем исполнение задачи в <a class="url" href="/services/crm-system/">CRM-системе</a></p>-->
+<!--        </article>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <a href="/about" class="callback our-client__btn our-client__btn_mob">ПОДРОБНЕЕ О СТУДИИ</a>-->
+<!--  </section>-->
+  <section class="calculator" id="calc">
+    <div class="calculator__wrap flex">
+      <div class="calculator__lefts">
+        <h2 class="main-title our-client__main-title calculator__main-title">Стартовый опрос</h2>
+        <div class="quiz_description">
           <p>
-            Enter <span class="bp-mode">Edit</span> mode from the admin bar <span style="display:inline-block; transform: rotate(45deg)">👆</span> to begin.
+            Пройдите опрос и получите <a href="/promotions/bonuses" target="_blank"><strong>бонусные ₽-рубли*</strong></a>, вы сможете использовать их при оплате <a href="/services-sites/" target="_blank">разработки сайта</a> или <a href="/services/mobile-application" target="_blank">мобильного приложения.</a> <br>
+            На основе ваших ответов, мы поймем, чем мы сможем быть полезны для вас<br>
           </p>
-        {% else %}
-          <p>
-            Add and edit content below in the content area. 👇
-          </p>
-        {% endif %}
-      {% endif %}
-      {% area data.page, 'main' %}
+        </div>
+        <ul class="calculator__pagination list-reset flex-c">
+          <li class="pagination__item pagination__item1">
+            <a href="" class="pagination__link pagination__link_active"></a>
+          </li>
+          <li class="pagination__item pagination__item2">
+            <a href="" class="pagination__link"></a>
+          </li>
+          <li class="pagination__item pagination__item3">
+            <a href="" class="pagination__link"></a>
+          </li>
+          <li class="pagination__item pagination__item4">
+            <a href="" class="pagination__link"></a>
+          </li>
+          <li class="pagination__item pagination__item5">
+            <a href="" class="pagination__link"></a>
+          </li>
+          <li class="pagination__item pagination__item6">
+            <a href="" class="pagination__link"></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="calculator__form">
+        <div class="form data-step-1">
+          <label class="form__label flex">
+            <input type="radio" class="checkbox checkbox_step1" name="checkbox_step1" value="var1" data-id="step_1_1">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Да, мне нужен сайт</span>
+          </label>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox checkbox_step1" name="checkbox_step1" value="var2" data-id="step_1_2">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Нет, у меня есть сайт, с которым нужно поработать</span>
+          </label>
+          <div class="form__action flex">
+            <a href="" class="form__link form__link_disable">Назад</a>
+            <a href="" class="form__link form__link_one">Далее</a>
+          </div>
+        </div>
+
+        <div class="form data-step-1_1">
+          <h4 class="form__title">Какой сайт вам нужен?</h4>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step2" value="Одностраничный — лендинг, сайт визитка (не более 4 страниц)" data-id="step_2_1">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Одностраничный — лендинг, сайт визитка (не более 4 страниц)</span>
+          </label>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step2" value="Многостраничный - интернет-магазин, корпоративный сайт (более 4 страниц)" data-id="step_2_2">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Многостраничный - интернет-магазин, корпоративный сайт (более 4 страниц)</span>
+          </label>
+          <div class="form__action flex">
+            <a href="#" data-link="data-step-1" data-num="1" class="form__link form__link_back">Назад</a>
+            <a href="#" data-link="data-step-1_2" data-current="data-step-1_1" data-num="3" class="form__link form__link_next">Далее</a>
+          </div>
+        </div>
+
+        <div class="form data-step-1_2">
+          <h4 class="form__title">Какой дизайн вам нужен?</h4>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step3" value="Классический - с использованием готовых шаблонов и решений" data-id="step_3_1">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Классический - с использованием готовых шаблонов и решений</span>
+          </label>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step3" value="Креативный - подбор необычных шрифтов, элементов дизайна" data-id="step_3_2">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Креативный - подбор необычных шрифтов, элементов дизайна</span>
+          </label>
+          <div class="form__action flex">
+            <a href="#" data-link="data-step-1_1" data-num="2" class="form__link form__link_back">Назад</a>
+            <a href="#" data-link="data-step-1_3" data-current="data-step-1_2" data-num="4" class="form__link form__link_next">Далее</a>
+          </div>
+        </div>
+
+        <div class="form data-step-1_3">
+          <h4 class="form__title">Нужен ли логотип?</h4>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step4" value="Нет, у меня есть свой логотип" data-id="step_4_1">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Нет, у меня есть свой логотип</span>
+          </label>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step4" value="Да, нужно разработать логотип" data-id="step_4_2">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Да, нужно разработать логотип</span>
+          </label>
+          <div class="form__action flex">
+            <a href="#" data-link="data-step-1_2" data-num="3" class="form__link form__link_back">Назад</a>
+            <a href="#" data-link="data-step-1_4" data-current="data-step-1_3" data-num="5" class="form__link form__link_next">Далее</a>
+          </div>
+        </div>
+
+        <div class="form data-step-1_4">
+          <h4 class="form__title">Будет ли анимация, корзина, всплывающие окна?</h4>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step5" value="Нет, мне нужен простой сайт" data-id="step_5_1">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Нет, мне нужен простой сайт</span>
+          </label>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step5" value="Да, будет что-то из этого или все" data-id="step_5_2">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Да, будет что-то из этого или все</span>
+          </label>
+          <div class="form__action flex">
+            <a href="#" data-link="data-step-1_3" data-num="5" class="form__link form__link_back">Назад</a>
+            <a href="#" data-current="data-step-1_4" data-num="6" class="form__link form__link_complit">Рассчитать</a>
+          </div>
+        </div>
+
+        <div class="form data-step-2_1">
+          <h4 class="form__title">Что нужно сделать с сайтом?</h4>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step10" value="Редизайн - переработать текущий дизайн" data-id="step_6_1">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Редизайн - переработать текущий дизайн</span>
+          </label>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step10" value="Техническая поддержка и сопровождение" data-id="step_6_2">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Техническая поддержка и сопровождение</span>
+          </label>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step10" value="Разработать к нему приложение" data-id="step_6_3">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Разработать к нему приложение</span>
+          </label>
+          <div class="form__action flex">
+            <a href="#" data-link="data-step-1" data-num="1" class="form__link form__link_back">Назад</a>
+            <a href="#" data-link="data-step-2_2" data-current="data-step-2_1" data-num="3" class="form__link form__link_next">Далее</a>
+          </div>
+        </div>
+
+        <div class="form data-step-2_2">
+          <h4 class="form__title">Есть ли у вас техническое задание?</h4>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step11" value="Нет" data-id="step_7_1">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Нет</span>
+          </label>
+          <label class="form__label flex">
+            <input type="radio" class="checkbox inpsumm" name="checkbox_step11" value="Да, я знаю, что конкретно мне нужно" data-id="step_7_2">
+            <span class="checkbox__custom"></span>
+            <span class="checkbox__descr">Да, я знаю, что конкретно мне нужно</span>
+          </label>
+
+          <div class="form__action flex">
+            <a href="#" data-link="data-step-2_1" data-num="1" class="form__link form__link_back">Назад</a>
+            <a href="#" data-current="data-step-2_2" data-num="4" class="form__link form__link_complit">Рассчитать</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <div class="text_block_1">Мы не делаем рекламу и маркетинг, но наши сайты удобны для пользователей и их легко <a class="url" href="/additional/seo-optimization">продвигать в поиске</a></div>
+
+</div>
 {% endblock %}

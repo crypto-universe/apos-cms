@@ -1,0 +1,45 @@
+{% fragment globalNavigation() %}
+<div class="container">
+    <nav class="navigation__mobile">
+        <ul class="navigation__cardmobile list-reset">
+            {% for item in data.global.primaryNav %}
+            {% set path = '' %}
+            {% if item.type == 'page' and item._page and item._page[0] %}
+            {% set path = item._page[0]._url %}
+            {% elif item.type == 'custom' %}
+            {% set path = item.customUrl %}
+            {% endif %}
+            <li class="navigation__item">
+                <a href="{{ path }}" class="navigation__link"
+                   {% if item.target[0] == '_blank' %} target="_blank" {% endif %}
+                >{{ item.label }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <div class="header__wrap flex-c">
+        <a href="/" class="logo">
+            <img src="/uploads/attachments/clxac2p8g000zfyijg99egc47-logo.svg" alt="Logo">
+        </a>
+        <nav class="navigation header__navigation">
+            <ul class="navigation__card list-reset flex">
+                {% for item in data.global.primaryNav %}
+                {% set path = '' %}
+                {% if item.type == 'page' and item._page and item._page[0] %}
+                {% set path = item._page[0]._url %}
+                {% elif item.type == 'custom' %}
+                {% set path = item.customUrl %}
+                {% endif %}
+                <li class="navigation__item">
+                    <a href="{{ path }}" class="navigation__link"
+                       {% if item.target[0] == '_blank' %} target="_blank" {% endif %}
+                    >{{ item.label }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <a href="#feedback" class="callback scroll">Обсудить проект</a>
+    </div>
+</div>
+{% endfragment %}

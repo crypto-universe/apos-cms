@@ -1,0 +1,44 @@
+.faq {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.faq__lefts {
+  flex: 1 1 30%;
+}
+
+.faq__main-title {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.faq__wrap {
+  flex: 1 1 65%;
+}
+
+.faq__item {
+  margin-bottom: 1em;
+}
+
+.faq__guest {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.faq__answer {
+  padding: 10px;
+  display: none;
+}
+
+.faq__guest svg {
+  transition: transform 0.3s;
+}
+
+.faq__item.open .faq__guest svg {
+  transform: rotate(180deg);
+}

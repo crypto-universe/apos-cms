@@ -44,7 +44,12 @@ module.exports = {
             'image-gallery': {},
             'columns': {},
             'side-by-side': {},
-            'accordion': {}
+            'accordion': {},
+            'portfolio': {},
+            'welcome': {},
+            'clients': {},
+            'custom-text': {},
+            'faq': {}
           }
         }
       }
