@@ -1,0 +1,38 @@
+<section data-offers-widget>
+    <section class="offers">
+        <span class="bg4"></span>
+        <span class="bg5"></span>
+        <span class="bg6"></span>
+        <div class="offers__right__desktop">
+            <ul class="offers__card list-reset flex-c-j">
+                {% for item in data.widget.offers %}
+                <li class="offers__item">
+                    <a href="{{ item.link }}" class="offers__link">#{{ item.title }}</a>
+                    <div class="offers__drop">
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.description }}</p>
+                        <p>{{ item.details | nl2br }}</p>
+                        <a href="{{ item.ctaLink }}" class="helper_informer">⬇ {{ item.ctaText }} ⬇</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="offers__right__mobile">
+            <ul class="offers__card list-reset flex-c-j">
+                {% for item in data.widget.offers %}
+                <li class="offers__item">
+                    <a href="{{ item.link }}" class="offers__link">#{{ item.title }}</a>
+                    <div id="{{ item.mobileId }}" class="offers__drop">
+                        <h4>{{ item.title }}</h4>
+                        <p>{{ item.description }}</p>
+                        <p>{{ item.details | nl2br }}</p>
+                        <a href="{{ item.ctaLink }}" class="helper_informer">⬇ {{ item.ctaText }} ⬇</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+</section>

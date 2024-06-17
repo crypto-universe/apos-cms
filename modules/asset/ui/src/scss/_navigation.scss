@@ -210,6 +210,11 @@
       }
     }
     &__link {
+
+      a {
+        color: var(--white);
+      }
+
       opacity: 1;
       transition: none;
       font-size: 14px;

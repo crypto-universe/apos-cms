@@ -49,7 +49,8 @@ module.exports = {
             'welcome': {},
             'clients': {},
             'custom-text': {},
-            'faq': {}
+            'faq': {},
+            'offers': {}
           }
         }
       }

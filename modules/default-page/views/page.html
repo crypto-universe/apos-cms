@@ -1,13 +1,43 @@
 {#
-  This is an example home page template. It inherits and extends a layout template
-  that lives in the top-level views/ folder for convenience
+This is an example home page template. It inherits and extends a layout template
+that lives in the top-level views/ folder for convenience
 #}
 
 {% extends "layout.html" %}
 
 {% block main %}
-  <section class="bp-content">
-    <h1>{{ data.page.title }}</h1>
-    {% area data.page, 'main' %}
-  </section>
+<section>
+    <div class="container inner-page text-page">
+        <button class="sidebar-toggle">☰</button>
+        <div class="intro">
+            <h1>{{ data.page.title }}</h1>
+        </div>
+        <div class="sidebar-container">
+            <div class="sidebar-wrapper">
+                <div class="sidebar">
+                    <div class="reading-progress-container">
+                        <div class="reading-progress-bar"></div>
+                    </div>
+                </div>
+                <div class="author-box">
+                    <img src="https://new.agenc.io/uploads/attachments/clxac2p8g000zfyijg99egc47-logo.svg" alt="Author's Gravatar"
+                         class="author-gravatar">
+                    <div class="author-info">
+                        <span class="author-title">Автор</span>
+                        <span class="author-name">Леонид</span>
+                    </div>
+
+                    <span id="dark-mode-toggle" class="material-symbols-outlined light-icon"> </span>
+
+                </div>
+            </div>
+            <div class="post-content">
+                {% area data.page, 'main' %}
+            </div>
+        </div>
+        <div class="outro">
+        </div>
+    </div>
+
+</section>
 {% endblock %}

@@ -56,6 +56,7 @@ require('apostrophe')({
     'clients-widget':{},
     'custom-text-widget': {},
     'faq-widget': {},
+    'offers-widget': {},
     'navigation': {},
     '@apostrophecms/admin-bar': {
       options: {
