@@ -342,7 +342,7 @@
     }
     &__link {
         display: block;
-        padding: 20px 40px;
+        padding: 10px 20px;
         font-weight: 500;
         font-size: 16px;
         line-height: 102%;
@@ -350,8 +350,8 @@
         text-transform: uppercase;
         color: #FFFFFF;
         opacity: 0.8;
-        border: 2px solid #EEEEEE;
-        border-radius: 60px;
+        border: none;
+        border-radius: 1rem;
         text-align: center;
         transition-property: background-color,border-color,color;
         transition-timing-function: ease-in-out;
@@ -736,15 +736,7 @@ footer{
     bottom: 0;
     left: 0;
 }
-footer::before{
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 100px;
-    height: 1px;
-    width: 100%;
-    background: #AFAFB6;
-}
+
 footer .content{
     max-width: 1250px;
     margin: auto;
@@ -1084,8 +1076,10 @@ top: -202.47px;
     .offers {
         margin-top: 100px;
         &__link {
-            padding: 15px 20px;
+            padding: 5px 10px;
             font-size: 14px;
+            margin-right: 3px;
+            margin-bottom: 3px;
         }
         &__item4 {
             margin-left: 0;

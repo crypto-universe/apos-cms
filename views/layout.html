@@ -11,10 +11,15 @@
 {{ apos.log('Looks like you forgot to override the title block in a template that does not have access to an Apostrophe page or piece.') }}
 {% endif %}
 {% endblock %}
+<script src="https://kit.fontawesome.com/628c8d2499.js" crossorigin="anonymous"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" type="text/css" />
 
 {% block beforeMain %}
 <div class="bp-wrapper">
-    <header class="bp-header">
+    <header class="nav" id="headernav">
         {% render navigation.globalNavigation() %}
     </header>
 
