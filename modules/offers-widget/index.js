@@ -48,9 +48,6 @@ module.exports = {
       }
     }
   },
-  icons: {
-    'question-circle': 'QuestionCircleIcon'
-  },
   methods(self) {
     return {
       renderList(offers) {

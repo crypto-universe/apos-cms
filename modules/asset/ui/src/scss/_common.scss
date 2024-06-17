@@ -52,6 +52,16 @@ font-weight: 300;
 overflow-x: hidden;
 }
 
+.ProseMirror>*+* {
+    margin-top: .75em;
+    line-height: 125%;
+}
+
+.ProseMirror>*li {
+    margin-left: 20px;
+}
+
+
 iframe {
     border: none;
 }
@@ -89,6 +99,7 @@ h1,h2,h3,h4,h5,p,ul {
     margin: 0;
 }
 
+
 button,input[type="submit"] {
     cursor: pointer;
 }
@@ -122,6 +133,13 @@ button,input[type="submit"] {
     margin-top: 12rem;
     @media (max-width: 768px) {
         margin-top: 6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5em;
+        line-height: 21px;
     }
 }
 
@@ -2328,6 +2346,12 @@ nav .menu-item:nth-of-type(4):hover ~ #sub-menu-container #sub-menu-holder {
 .text-page p,.text-page ul {
     margin: .8em 0;
     line-height: 1.35
+}
+
+.text-page ul li {
+    margin-left: 20px;
+    list-style-type: disc;
+    margin-bottom: 10px;
 }
 
 
