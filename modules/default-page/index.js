@@ -37,11 +37,21 @@ module.exports = {
               ],
               insert: [
                 'table',
-                'image'
+                'image',
               ]
             },
             '@apostrophecms/image': {},
-            '@apostrophecms/video': {}
+            '@apostrophecms/video': {},
+            'image-gallery': {},
+            'columns': {},
+            'side-by-side': {},
+            'accordion': {},
+            'portfolio': {},
+            'welcome': {},
+            'clients': {},
+            'custom-text': {},
+            'faq': {},
+            'offers': {}
           }
         }
       }

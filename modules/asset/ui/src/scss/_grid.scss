@@ -2,7 +2,7 @@
     padding-top: 60px;
 
     &__title {
-        margin-top: 71px;
+        margin-top: 5px;
         font-size: 64px;
         line-height: 88px;
         font-weight: 500;
@@ -13,15 +13,21 @@
     }
 
     &__descr {
-        max-width: 496px;
+        max-width: 545px;
         width: 100%;
         margin-top: 30px;
         font-weight: 300;
-        font-size: 18px;
-        line-height: 25px;
-        color: #FFFFFF;
-        opacity: 0.8;
+        font-size: 23px;
+        line-height: 35px;
+        color: #fff;
+        opacity: .85;
+
+        p {
+            margin: 0.8em 0;
+            line-height: 1.35;
+        }
     }
+
     &__btn {
         display: table;
         padding: 20px 40px;
@@ -50,7 +56,7 @@
     height: 1053px;
     left: 211.61px;
     top: -205px;
-    background: radial-gradient(50% 50% at 50% 50%, #4854FF 0%, rgba(97, 107, 255, 0) 100%);
+    background: radial-gradient(50% 50% at 50% 50%, #249967 0%, rgba(97, 107, 255, 0) 75%);
     filter: blur(200px);
     transform: rotate(22.66deg);
     pointer-events: none;
@@ -197,6 +203,31 @@
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+
+.title_left {
+    display: block;
+    font-size: 21px;
+    font-weight: 400;
+    width: 195px;
+    line-height: 22px;
+    margin-bottom: 5px;
+}
+
+.price__left {
+    font-weight: 300;
+    font-size: 13px;
+    opacity: .8;
+}
+
+.reviews__descr {
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 20px;
+    color: #fff;
+    opacity: .9;
+}
+
 .our-client {
     margin-top: 310px;
     opacity: 0.9;
@@ -271,7 +302,7 @@
         margin-bottom: 56px;
     }
     &__left {
-        max-width: 85px;
+        max-width: 310px;
         width: 100%;
         font-weight: 600;
         font-size: 14px;
@@ -285,8 +316,11 @@
         border-radius: 11px;
     }
     &__right {
+        margin-left: 0;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
-        margin-left: 17px;
     }
     &__descr {
         margin-bottom: 10px;
@@ -358,12 +392,11 @@
     }
     &__link_black,
     &__link:hover {
-        background-color: #fff;
-        color: #222222;
-        border-color: rgba(255,255,255,0.95);
+        color: #e0e0e0;
+        opacity: 1;
     }
     &__link_black:hover {
-        background-color: rgba(255, 255, 255, 0.5);
+
     }
     &__item4 {
         margin-left: 112px;
@@ -1075,8 +1108,8 @@ top: -202.47px;
     .offers {
         margin-top: 100px;
         &__link {
-            padding: 5px 10px;
-            font-size: 14px;
+            padding: 3px 3px;
+            font-size: 12px;
             margin-right: 3px;
             margin-bottom: 3px;
         }

@@ -143,6 +143,12 @@ button,input[type="submit"] {
     }
 }
 
+
+.separator {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .grid {
     position: relative;
     margin: 0 auto;
@@ -1295,12 +1301,12 @@ figure.effect-chico:hover p {
 
 a {
     outline: none;
-    color: #3498db;
+    color: #778bfd;
     text-decoration: none;
 }
 
 a:hover, a:focus {
-    color: #528cb3;
+    color: #3498db;
 }
 
 .content {
@@ -2051,9 +2057,7 @@ a {
     transform: translate(0, 0);
 }
 .offers__link_black, .offers__link:hover {
-    background-color: #fff;
-    color: #222222;
-    border-color: rgba(255, 255, 255, 0.95);
+    color: #fff;
 }
 .offers__link_black:hover {
     background-color: rgba(255, 255, 255, 0.5);
@@ -2071,15 +2075,13 @@ a {
 }
 .offers__drop {
     position: absolute;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.365;
-    letter-spacing: -0.04em;
+    font-weight: 300;
+    font-size: 14px;
     color: #F7F4F8;
-    width: 428px;
+    width: 277px;
     max-width: calc(100vw - 30px);
     padding: 20px;
-    background: rgba(34, 34, 34, 0.95);
+    background: rgba(34, 31, 38, 0.93);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     border-radius: 1rem;
@@ -2087,12 +2089,10 @@ a {
     left: 50%;
     bottom: 100%;
     margin-bottom: 15px;
-    margin-left: calc(100% - 25rem);
-    -webkit-transform: translate(0, -50px);
+    margin-left: calc(100% - 23rem);
     transform: translate(0, -50px);
     opacity: 0;
     visibility: hidden;
-    -webkit-transition: 0.3s all ease;
     transition: 0.3s all ease;
     margin-right: 3px;
 }
@@ -2114,11 +2114,11 @@ a {
 }
 
 .offers__item:first-of-type .offers__drop {
-    margin-left: calc(100% - 5rem);
+    margin-left: calc(100% - 20rem);
 }
 
 .offers__item:first-of-type .offers__drop:after {
-    margin-left: calc(100% - 38rem);
+    margin-left: calc(100% - 20rem);
 }
 
 @media (max-width: 1024px) {
@@ -2129,7 +2129,7 @@ a {
         margin-left: 0;
     }
     .offers__item:first-of-type .offers__drop:after {
-        margin-left: calc(100% - 38rem);
+        margin-left: calc(100% - 20rem);
     }
 }
 
@@ -2144,7 +2144,8 @@ a {
     }
 }
 .offers__drop p {
-    margin: 0 0 15px;
+    margin: 0.8em 0;
+    line-height: 1.35;
 }
 .offers__drop p:last-child {
     margin-bottom: 0;
@@ -2170,6 +2171,12 @@ a {
     }
 }
 
+.breadcrumb {
+    margin-left: 15px;
+    margin-top: 5rem;
+}
+
+
 nav {
     width: var(--menu-width);
     display: flex;
@@ -2180,7 +2187,6 @@ nav {
     margin: 0 auto;
     perspective: 2000px;
     flex-wrap: wrap;
-    top: 3em;
 }
 
 nav .menu-item {
@@ -2442,7 +2448,7 @@ body.dark-mode {
 
 .sidebar-wrapper {
     position: sticky;
-    top: 25px;
+    top: 5rem;
     width: 275px;
     flex: none;
 }

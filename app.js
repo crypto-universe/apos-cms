@@ -23,6 +23,7 @@ require('apostrophe')({
     '@apostrophecms/svg-sprite': {},
     '@apostrophecms/anchors': {},
     '@apostrophecms/favicon': {},
+    '@apostrophecms/notification': {},
     '@apostrophecms/i18n-static': {
       options: {
         excludeNamespaces: [ 'aposEvent', 'aposForm' ]

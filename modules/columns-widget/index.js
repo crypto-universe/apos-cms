@@ -87,7 +87,16 @@ module.exports = {
               ]
             },
             '@apostrophecms/image': {},
-            '@apostrophecms/video': {}
+            '@apostrophecms/video': {},
+            'columns': {},
+            'side-by-side': {},
+            'accordion': {},
+            'portfolio': {},
+            'welcome': {},
+            'clients': {},
+            'custom-text': {},
+            'faq': {},
+            'offers': {}
           }
         }
       },
@@ -125,7 +134,15 @@ module.exports = {
             },
             '@apostrophecms/image': {},
             '@apostrophecms/video': {},
-            'columns': {}
+            'columns': {},
+            'side-by-side': {},
+            'accordion': {},
+            'portfolio': {},
+            'welcome': {},
+            'clients': {},
+            'custom-text': {},
+            'faq': {},
+            'offers': {}
           }
         },
         if: {
@@ -176,7 +193,15 @@ module.exports = {
             },
             '@apostrophecms/image': {},
             '@apostrophecms/video': {},
-            'columns': {}
+            'columns': {},
+            'side-by-side': {},
+            'accordion': {},
+            'portfolio': {},
+            'welcome': {},
+            'clients': {},
+            'custom-text': {},
+            'faq': {},
+            'offers': {}
           }
         }
       },

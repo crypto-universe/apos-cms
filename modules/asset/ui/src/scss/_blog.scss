@@ -1,0 +1,46 @@
+// modules/asset/ui/src/scss/_blog.scss
+
+.bg-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width: 576px) {
+    width: 540px;
+  }
+
+  @media (min-width: 768px) {
+    width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    width: 960px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 1140px;
+  }
+}
+
+.bg-h1 {
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.bg-publication-date {
+  text-align: center;
+  font-style: italic;
+  color: #505050;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.bg-content {
+  font-size: 16px;
+
+  p {
+    margin-bottom: 30px;
+    line-height: 30px;
+  }
+}

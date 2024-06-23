@@ -20,7 +20,7 @@
       <span class="bg3"></span>
         {# Breadcrumb trail to the current page or piece. Not on the home page#}
         {% if data.page and data.page._ancestors.length %}
-        <nav class="breadcrumb">
+        <div class="breadcrumb">
             {% for page in data.page._ancestors %}
             <a href="{{ page._url }}">{{ page.title }}</a> <span class="separator"> - </span>
             {% endfor %}
@@ -32,7 +32,7 @@
             {# We're rendering a normal page. #}
             <span>{{ data.page.title }}</span>
             {% endif %}
-        </nav>
+        </div>
         {% endif %}
         {% endblock %}
         <div class="container">

@@ -1,34 +1,43 @@
 {% import 'button-arrows.html' as buttonArrows %}
 
 <section data-aos="{{ data.widget.animationEffects }}" class="image-gallery">
-
-    <div class="swiper image-gallery__swiper" id="imageGallery" data-image-gallery data-slides="{{ data.widget.displayType}}">
-        <div class="swiper-wrapper" itemscope itemtype="http://schema.org/ImageGallery">
-            {% for image in data.widget.portfolioItems %}
-            {% set background = apos.image.first(image) %}
-
-            <div id="{{ image._id }}" class="swiper-slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                <div
-                        itemprop="contentUrl"
-                        class="image-gallery__{{ background.extension }}"
-                >
-                    <img
-                            src="{{ apos.attachment.url(background, {size: 'full' }) }}"
-                            alt="{{ background.title }}"
-                            itemprop="thumbnail"
-                            class="img-fluid"
-                    />
-                    <div class="portfolio-details">
-                        <h3>{{ image.title }}</h3>
-                        <p>{{ image.description }}</p>
-                        <span class="price">{{ image.price }}</span>
+    <div class="reviews__card swiper">
+        <div class="swiper image-gallery__swiper" id="imageGallery" data-image-gallery data-slides="{{ data.widget.displayType}}">
+            <div class="swiper-wrapper" itemscope itemtype="http://schema.org/ImageGallery">
+                {% for image in data.widget.portfolioItems %}
+                {% set background = apos.image.first(image) %}
+                <div id="{{ image._id }}" class="reviews__item reviews__item__more_addditional write__item write__item1 swiper-slide flex" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                    <div itemprop="contentUrl" class="image-gallery__{{ background.extension }}">
+                        <div class="portfolio-details">
+                            <div class="reviews__left image_item_preview">
+                                <a href="{{ image.url }}"><img src="{{ apos.attachment.url(background, {size: 'full' }) }}" alt="{{ image.title }}"></a>
+                                <a href="{{ image.url }}" class="title_left">{{ image.title }}</a>
+                                <span class="price__left">
+                                от {{ image.price }} ₽
+                            </span>
+                            </div>
+                            <div class="reviews__right flex">
+                                <p class="reviews__descr">
+                                    {{ image.description }}
+                                </p>
+                                <a href="{{ image.url }}" class="reviews__more">
+                                    Подробнее
+                                    <svg width="15" height="7" viewBox="0 0 15 7" fill="none">
+                                        <path opacity="0.8" d="M0 3.65789H13M13 3.65789L7.71186 0.5M13 3.65789L7.71186 6.5" stroke="white" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            {% if buttonArrows and buttonArrows.swiper %}
+            {% render buttonArrows.swiper() %}
+            {% else %}
+            <!-- Fallback content or error message -->
+            <p>Navigation arrows are not available.</p>
+            {% endif %}
         </div>
-
-        {% render buttonArrows.swiper() %}
     </div>
-
 </section>
