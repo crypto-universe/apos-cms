@@ -3,7 +3,10 @@ module.exports = {
   options: {
     label: 'FAQ',
     description: 'A widget to display frequently asked questions',
-    icon: 'question-circle'
+    icon: 'frequently-asked-questions'
+  },
+  icons: {
+    'frequently-asked-questions': 'FrequentlyAskedQuestions'
   },
   fields: {
     add: {

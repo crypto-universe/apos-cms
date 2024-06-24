@@ -1,6 +1,7 @@
 require('apostrophe')({
   shortName: 't-a',
   baseUrl: 'https://new.agenc.io',
+  bundles: [ '@apostrophecms/rich-text-example-extensions', '@apostrophecms/blog' ],
   modules: {
     // Apostrophe module configuration
     // *******************************
@@ -12,6 +13,20 @@ require('apostrophe')({
     // have a minimal configuration here to turn them on: `moduleName: {}`
     // ***********************************************************************
     // `className` options set custom CSS classes for Apostrophe core widgets.
+    // The main blog piece type module
+    // A piece type for articles
+    article: {},
+    // Tease an article on any page
+    'article-widget': {},
+    // Paginated index of articles, and with pages for individual articles
+    'article-page': {},
+    topic: {},
+    '@apostrophecms/blog': {},
+    // The blog page module
+    '@apostrophecms/blog-page': {},
+    '@apostrophecms/typography': {},
+    '@apostrophecms/smilies': {},
+    '@apostrophecms/characterCount': {},
     '@apostrophecms/login-totp': {},
     '@apostrophecms/open-graph': {},
     '@apostrophecms/piece-type-exporter': {},

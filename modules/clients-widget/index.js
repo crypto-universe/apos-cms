@@ -3,7 +3,10 @@ module.exports = {
   options: {
     label: 'Clients',
     description: 'A widget to display a list of clients with links and images',
-    icon: 'user-friends'
+    icon: 'crown'
+  },
+  icons: {
+    'crown': 'Crown'
   },
   fields: {
     add: {

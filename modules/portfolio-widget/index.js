@@ -6,7 +6,10 @@ module.exports = {
     label: 'Portfolio',
     description: 'Add a portfolio of projects to your page',
     previewImage: 'jpg',
-    icon: 'portfolio-icon'
+    icon: 'dots-square'
+  },
+  icons: {
+    'dots-square': 'DotsSquare'
   },
   fields: {
     add: {

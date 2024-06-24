@@ -3,7 +3,10 @@ module.exports = {
   options: {
     label: 'Welcome',
     description: 'Welcome widget with editable text fields',
-    icon: 'home'
+    icon: 'heart-box'
+  },
+  icons: {
+    'heart-box': 'HeartBox'
   },
   fields: {
     add: {

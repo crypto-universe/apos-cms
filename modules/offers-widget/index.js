@@ -3,7 +3,10 @@ module.exports = {
   options: {
     label: 'Offers',
     description: 'A widget to display offers',
-    icon: 'question-circle'
+    icon: 'offer'
+  },
+  icons: {
+    'offer': 'Offer'
   },
   fields: {
     add: {

@@ -3,7 +3,10 @@ module.exports = {
   options: {
     label: 'Custom Text',
     description: 'A widget to display customizable text with custom styles',
-    icon: 'align-left'
+    icon: 'format-textbox'
+  },
+  icons: {
+    'format-textbox': 'FormatTextbox'
   },
   fields: {
     add: {

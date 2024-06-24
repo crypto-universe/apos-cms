@@ -19,7 +19,8 @@ module.exports = {
                 'link',
                 '|',
                 'bulletList',
-                'orderedList'
+                'orderedList',
+                'characterCount'
               ],
               styles: [
                 {
@@ -38,7 +39,20 @@ module.exports = {
               insert: [
                 'table',
                 'image',
-              ]
+              ],
+              typoConfig: {
+                // Will no longer convert `(tm)` to ™
+                trademark: false,
+                // Will convert `->` to `=>`
+                rightArrow: '=>'
+              },
+              smiliesConfig: {
+                tone: 2
+              },
+              charCountConfig: {
+                // How X!
+                limit: 280
+              }
             },
             '@apostrophecms/image': {},
             '@apostrophecms/video': {},
