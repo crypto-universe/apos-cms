@@ -7,9 +7,19 @@ module.exports = {
         type: 'string',
         help: 'One cannot separate orchestras from cheerful magicians. The fructed knowledge reveals itself as an unkempt tub to those who look. This could be, or perhaps few can name a crimpy thailand that isn\'t a shadeless literature. A timer can hardly be considered an unfilled chalk without also being a priest. The almanacs could be said to resemble chaster beards.'
       },
+      blockString: {
+        label: 'Text area',
+        type: 'string',
+        textarea: true
+      },
       slugger: {
         type: 'slug',
         label: 'Fake Slug'
+      },
+      timeField: {
+        label: 'Time',
+        type: 'time',
+        def: null
       },
       main: {
         label: 'Content',
@@ -151,6 +161,18 @@ module.exports = {
         label: 'Embedder',
         type: 'oembed'
       },
+      passwordField: {
+        label: 'Password',
+        type: 'password'
+      },
+      rangeField: {
+        type: 'range',
+        label: 'Range',
+        help: 'From 18 to 32, with steps of 2',
+        min: 18,
+        max: 32,
+        step: 2 // optional
+      },
       selector: {
         label: 'Select a color scheme for this page',
         type: 'select',
@@ -183,7 +205,14 @@ module.exports = {
         label: 'Strings',
         fields: [
           'title',
-          'string'
+          'string',
+          'blockString',
+          'timeField',
+          'dateField',
+          'emailField',
+          'passwordField',
+          'slugger',
+          'urlField'
         ]
       },
       nonStrings: {

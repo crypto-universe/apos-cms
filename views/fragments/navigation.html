@@ -12,24 +12,13 @@
         <a href="/">Агенсио</a>
     </div>
     <nav class="nav__core">
-        <div class="nav__core__link nav__core__link">
-            <a href="/">Главная</a>
+        {% for item in data.global.primaryNav %}
+        <div class="nav__core__link{% if item.children and item.children|length > 0 %} nav__core__link--sub{% endif %}" {% if item.children and item.children|length > 0 %}data-presub="{{ loop.index }}"{% endif %}>
+            <a href="{% if item.type == 'page' %}{{ item._page[0]._url }}{% else %}{{ item.customUrl }}{% endif %}" {% if item.target and item.target[0] == '_blank' %}target="_blank"{% endif %}>
+            {{ item.label }}
+            </a>
         </div>
-        <div class="nav__core__link nav__core__link">
-            О нас
-        </div>
-        <div class="nav__core__link nav__core__link--sub" data-presub="1">
-            Наши услуги
-        </div>
-        <div class="nav__core__link nav__core__link--sub" data-presub="3">
-            Сайты
-        </div>
-        <div class="nav__core__link nav__core__link--sub" data-presub="0">
-            Приложения
-        </div>
-        <div class="nav__core__link nav__core__link--sub" data-presub="2">
-            Поддержка
-        </div>
+        {% endfor %}
     </nav>
     <div class="nav__cta">
         <div class="nav__cta">
@@ -49,233 +38,25 @@
             <path d="M7 1L2 6L7 11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
     </div>
-    <div class="nav__sub__item" data-sub="0">
+    {% for item in data.global.primaryNav %}
+    {% if item.children and item.children|length > 0 %}
+    <div class="nav__sub__item" data-sub="{{ loop.index }}">
         <div class="nav__sub__box">
             <ul>
-                <li><a href="index.html">Веб-приложения</a></li>
-                <li><a href="contacts.html">Облачные сервисы</a></li>
-                <li><a href="about.html">Компьютерные приложения</a></li>
-                <li><a href="about.html">Игровые приложения</a></li>
-                <li><a href="about.html">Корпоративные решения</a></li>
+                {% for child in item.children %}
+                <li>
+                    <a href="{% if child.type == 'page' %}{{ child._page[0]._url }}{% else %}{{ child.customUrl }}{% endif %}" {% if child.target and child.target[0] == '_blank' %}target="_blank"{% endif %}>
+                    {{ child.label }}
+                    </a>
+                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
-    <div class="nav__sub__item" data-sub="1">
-        <div class="nav__sub__box">
-            <ul>
-                <li><a href="mobile_apps.html">Создание мобильных приложений</a></li>
-                <li><a href="site_creation.html">Разработка сайтов под ключ</a></li>
-                <li><a href="site_creation.html">Техническое сопровождение</a></li>
-                <li><a href="site_creation.html">Поддержка для стартапов</a></li>
-                <li><a href="ddos_protection.html">Защита от DDOS и взлома</a></li>
-                <li><a href="site_creation.html">Аудит безопасности</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="nav__sub__item" data-sub="2">
-        <div class="nav__sub__box">
-            <ul>
-                <li><a href="crm_system.html">Продвижение сайта под ключ</a></li>
-
-                <li><a href="tech_support.html">Техническая поддержка</a></li>
-                <li><a href="crm_system.html">Аудит безопасности</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="nav__sub__item" data-sub="3">
-        <div class="nav__sub__box">
-            <ul>
-                <li><a href="business_portals.html">Интернет-магазин</a></li>
-                <li><a href="business_portals.html">Сайт под ресторан/кафе</a></li>
-                <li><a href="business_portals.html">Сайт для отеля/гостиницы</a></li>
-                <li><a href="business_portals.html">Сайт для ЖК</a></li>
-                <li><a href="hotels.html">Бизнес-портал</a></li>
-            </ul>
-        </div>
-    </div>
+    {% endif %}
+    {% endfor %}
 </div><!--/nav__sub-->
 
-
-<!--    <nav class="navigation__mobile">-->
-<!--        <ul class="navigation__cardmobile list-reset">-->
-<!--            {% for item in data.global.primaryNav %}-->
-<!--            {% set path = '' %}-->
-<!--            {% if item.type == 'page' and item._page and item._page[0] %}-->
-<!--            {% set path = item._page[0]._url %}-->
-<!--            {% elif item.type == 'custom' %}-->
-<!--            {% set path = item.customUrl %}-->
-<!--            {% endif %}-->
-<!--            <li class="navigation__item">-->
-<!--                <a href="{{ path }}" class="navigation__link"-->
-<!--                   {% if item.target[0] == '_blank' %} target="_blank" {% endif %}-->
-<!--                >{{ item.label }}</a>-->
-<!--            </li>-->
-<!--            {% endfor %}-->
-<!--        </ul>-->
-<!--    </nav>-->
-
-<!--    <div class="header__wrap flex-c">-->
-<!--        <a href="/" class="logo">-->
-<!--            <img src="/uploads/attachments/clxac2p8g000zfyijg99egc47-logo.svg" alt="Logo">-->
-<!--        </a>-->
-<!--        <nav class="navigation header__navigation">-->
-<!--            <ul class="navigation__card list-reset flex">-->
-<!--                {% for item in data.global.primaryNav %}-->
-<!--                {% set path = '' %}-->
-<!--                {% if item.type == 'page' and item._page and item._page[0] %}-->
-<!--                {% set path = item._page[0]._url %}-->
-<!--                {% elif item.type == 'custom' %}-->
-<!--                {% set path = item.customUrl %}-->
-<!--                {% endif %}-->
-<!--                <li class="navigation__item">-->
-<!--                    <a href="{{ path }}" class="navigation__link"-->
-<!--                       {% if item.target[0] == '_blank' %} target="_blank" {% endif %}-->
-<!--                    >{{ item.label }}</a>-->
-<!--                </li>-->
-<!--                {% endfor %}-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--        <button class="callback scroll modal-btn" data-modal="gallery-modal">Обсудить проект</button>-->
-<!--        <div class="modal" id="gallery-modal">-->
-<!--            <div class="modal__inner">-->
-<!--                <div class="modal__cont">-->
-<!--                    <div class="modal__header">-->
-<!--                        <h2>Загрузить фото</h2>-->
-<!--                        <button class="modal__close"></button>-->
-<!--                    </div>-->
-<!--                    <div class="modal__body">-->
-<!--                        <iframe width="400" height="450"-->
-<!--                                src="https://doit.agenc.io/forms/wtl/6955d25d65f2798e24c5b3f03007ba7a" frameborder="0"-->
-<!--                                sandbox="allow-top-navigation allow-forms allow-scripts allow-same-origin allow-popups"-->
-<!--                                allowfullscreen loading="lazy"></iframe>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--
-These animations are total 18KB and only available on the Chrome desktop browser.
--->
-
-<!--    <div class="o-page">-->
-<!--        <div class="skill-set">-->
-
-<!--            &lt;!&ndash; UI &ndash;&gt;-->
-<!--            <a href="#" class="skill-outer ui">-->
-<!--                <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">-->
-<!--                    <g opacity=".87" fill="none" stroke="#fff">-->
-<!--                        <text class="text" transform="translate(50 150.11)" font-size="16" fill="#fff" stroke="none" font-family="Manpore, sans-serif" font-weight="500">-->
-<!--                            Начало-->
-<!--                        </text>-->
-<!--                        <path class="rectangle" d="M30.57 22.69h98.86v98.86H30.57z"/>-->
-<!--                        <path class="bar" d="M30.57 37.59h98.86"/>-->
-<!--                        <circle class="dot3" cx="58.76" cy="29.96" r="3.09"/>-->
-<!--                        <circle class="dot2" cx="49.19" cy="29.96" r="3.09"/>-->
-<!--                        <circle class="dot1" cx="39.62" cy="29.96" r="3.09"/>-->
-<!--                        <rect class="btn" x="55.28" y="67.21" width="49.43" height="24.72" rx="4"/>-->
-<!--                        <path class="heart" 				fill="#121212" d="M80 85.57l-1-.86c-3.37-3.06-5.59-5.07-5.59-7.54a3.56 3.56 0 0 1 3.6-3.6A3.9 3.9 0 0 1 80 74.94a3.9 3.9 0 0 1 2.94-1.37 3.56 3.56 0 0 1 3.6 3.6c0 2.47-2.22 4.48-5.59 7.54z"/>-->
-<!--                    </g>-->
-<!--                </svg>-->
-<!--            </a>-->
-
-
-<!--            &lt;!&ndash; interactive &ndash;&gt;-->
-
-<!--            <a href="#" class="skill-outer interactive">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">-->
-<!--                    <g opacity=".87" fill="none" stroke="#fff">-->
-<!--                        <text class="text" transform="translate(45 146.24)" fill="#fff" stroke="none" font-size="16" font-family="Manpore, sans-serif" font-weight="500">-->
-<!--                            Креатив-->
-<!--                        </text>-->
-<!--                        <path class="ellipse4"/>-->
-<!--                        <path class="ellipse3"/>-->
-<!--                        <path class="ellipse2"/>-->
-<!--                        <path class="ellipse1"/>-->
-<!--                        <path class="ellipse0"/>-->
-<!--                        <path class="ellipse" d="M68,61.83a12,12 0 1,0 24,0a12,12 0 1,0 -24,0" stroke-miterlimit="10" fill="#fff" opacity="0.87"/>-->
-<!--                        <path class="hand" d="M100.33 82.21a5.82 5.82 0 0 0-3.66.19c-.08-.93-.46-3.07-2.32-3.64a5.83 5.83 0 0 0-3.74.21 3.59 3.59 0 0 0-2.24-3 5.85 5.85 0 0 0-3.64.17v-7.68c0-2-.83-5.44-4-5.44-2.91 0-4 3.25-4 5.44v17.08C75.34 84.12 73 82.13 71.14 82c-3-.24-5.19 1.64-4.59 4.56s3.12 2.75 5 5.14 6.34 9.81 6.37 9.86c.67 1.26 2.49 4.74 2.79 5.62a12 12 0 0 1 .27 3.09.79.79 0 0 0 .22.55.76.76 0 0 0 .54.23h17.18a.77.77 0 0 0 .76-.68 17.08 17.08 0 0 0 0-2.73 5.5 5.5 0 0 1 1.32-3.84 11.61 11.61 0 0 0 1.63-4.52.41.41 0 0 0 0-.11V86.28c.04-.28-.01-3.35-2.3-4.07z" fill="#121212" stroke="#fff" stroke-miterlimit="10"/>-->
-<!--                        <path class="bar" d="M96.68 88.8v-6.4"/>-->
-<!--                        <path class="bar" d="M90.61 87.29v-8.36"/>-->
-<!--                        <path class="bar" d="M84.73 86.74V76.13"/>-->
-<!--                        <path class="bar" d="M76.79 87.94v-2.39"/>-->
-<!--                    </g>-->
-<!--                </svg>-->
-<!--            </a>-->
-
-
-<!--            &lt;!&ndash; graphic &ndash;&gt;-->
-<!--            <a href="#" class="skill-outer graphic">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">-->
-<!--                    <g opacity=".87" fill="none" stroke="#fff">-->
-<!--                        <text id="text" fill="#fff" font-family="Manpore, sans-serif" font-size="16px" font-weight="500" stroke="none" transform="translate(50 146.24)">-->
-<!--                            Защита-->
-<!--                        </text>-->
-<!--                        <path class="graphic-shape2" d="M68.54 60.66h60v60h-60z"/>-->
-<!--                        <path class="graphic-middle" d="M68.54 91h.31a30 30 0 0 0 30-30v-.31H68.54z"/>-->
-<!--                        <path class="graphic-shape1" d="M68.85 31a30 30 0 0 1 30 30 30 30 0 0 1-30 30 30 30 0 0 1-30-30 30 30 0 0 1 30-30z"/>-->
-<!--                        <circle class="graphic-dot1" cx="" cy="" r="3" fill="#fff" stroke="transparent"/>-->
-<!--                        <circle class="graphic-dot2" cx="" cy="" r="3" fill="#fff" stroke="transparent"/>-->
-<!--                    </g>-->
-<!--                </svg>-->
-<!--            </a>-->
-
-
-<!--            &lt;!&ndash; infographic &ndash;&gt;-->
-<!--            <a class="skill-outer infographic" href="#" class="skill-outer">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">-->
-<!--                    <g opacity=".87" fill="none" stroke="#fff">-->
-<!--                        <text class="text" transform="translate(50 146.24)" font-size="16" fill="#fff" stroke="none" font-family="Manpore, sans-serif" font-weight="500">-->
-<!--                            Бизнес-->
-<!--                        </text>-->
-<!--                        <path class="left-bottom" d="M43.72 121.55c-7.86-1.45-13.15-4.64-13.15-8.21"/>-->
-<!--                        <path class="left-side3" d="M53.18 76.81h22.6v36.53h-22.6z"/>-->
-<!--                        <path class="left-side2" d="M53.18 76.81l-9.46 8.22v36.52l9.46-8.21V76.81z"/>-->
-<!--                        <path class="left-side1" d="M30.57 76.81v36.53"/>-->
-<!--                        <path class="left-top" d="M43.72 85l9.46-8.22h22.6c0-5-10.2-9-22.6-9s-22.6 4.09-22.6 9c0 3.53 5.14 6.74 13.14 8.22"/>-->
-
-<!--                        <path class="right-bottom" d="M129.43 111c0 3.57-5.29 6.76-13.15 8.21"/>-->
-<!--                        <path class="right-side3" d="M129.43 31.73v79.28"/>-->
-<!--                        <path class="right-side2" d="M106.82 31.73l9.46 8.22v79.27l-9.46-8.21V31.73z"/>-->
-<!--                        <path class="right-side1" d="M84.22 31.73h22.6V111h-22.6z"/>-->
-<!--                        <path class="right-top" d="M116.28 40l-9.46-8.22h-22.6c0-5 10.2-9 22.6-9s22.6 4.08 22.6 9c0 3.53-5.14 6.74-13.14 8.22"/>-->
-<!--                    </g>-->
-<!--                </svg>-->
-<!--            </a>-->
-
-<!--            &lt;!&ndash; 	typo &ndash;&gt;-->
-<!--            <a href="#" class="skill-outer typo">-->
-<!--                <svg class="typo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">-->
-<!--                    <g pacity=".87" fill="none" stroke="#fff">-->
-<!--                        <text class="text" transform="translate(31.99 146.24)" fill="#fff" stroke="none" font-size="16" font-family="Manpore, sans-serif" font-weight="500">-->
-<!--                            Портфолио-->
-<!--                        </text>-->
-<!--                        <path class="typo-right-under" fill="#fff" d="M112.06 111.91a6.21 6.21 0 0 1-.4-1.13c-.11-.43-.2-.88-.28-1.36a8.58 8.58 0 0 1-1.31 1.14 9.37 9.37 0 0 1-1.65.92 9.56 9.56 0 0 1-2 .62 10.91 10.91 0 0 1-2.34.2 11.35 11.35 0 0 1-3.73-.63 9 9 0 0 1-2.9-1.67 7.41 7.41 0 0 1-2.53-5.73 7.57 7.57 0 0 1 3.21-6.45c2.11-1.51 5.23-2.23 9.37-2.18h3.81V94.1a3.87 3.87 0 0 0-1.21-3 5.27 5.27 0 0 0-3.59-1.16 4.34 4.34 0 0 0-3.06.86 3.11 3.11 0 0 0-1 2.38l-6.82-.08a7.17 7.17 0 0 1 .78-3.21 8.09 8.09 0 0 1 2.22-2.65 10.89 10.89 0 0 1 3.54-1.78 15.18 15.18 0 0 1 4.76-.62 16.75 16.75 0 0 1 4.47.64 10.88 10.88 0 0 1 3.6 1.74 8 8 0 0 1 2.35 2.94 9.13 9.13 0 0 1 .81 4.08l-.16 11.39a18.69 18.69 0 0 0 .23 3.53 8.61 8.61 0 0 0 .75 2.42v.42zm-6.44-4.91a6.91 6.91 0 0 0 1.91-.22 6.83 6.83 0 0 0 1.61-.62 5.51 5.51 0 0 0 1.24-.88 4.67 4.67 0 0 0 .82-1v-4.56h-3.48a10.37 10.37 0 0 0-2.72.28 5.28 5.28 0 0 0-1.85.83 3.46 3.46 0 0 0-1.07 1.32 4.05 4.05 0 0 0-.37 1.68 3 3 0 0 0 1 2.29 4.12 4.12 0 0 0 2.91.88z"/>-->
-<!--                        <path class="typo-left-under" fill="#fff" d="M77.28 94H54.91l-5.38 17.35H41l21.63-67h7.14l21.27 67h-8.46zm-20.07-7.44H75l-8.81-29.09z"/>-->
-<!--                        <path class="wave-middle" stroke="transparent" fill="#121212"/>-->
-<!--                        <path class="typo-right-top" stroke="#fff" d="M112.06 111.91a6.21 6.21 0 0 1-.4-1.13c-.11-.43-.2-.88-.28-1.36a8.58 8.58 0 0 1-1.31 1.14 9.37 9.37 0 0 1-1.65.92 9.56 9.56 0 0 1-2 .62 10.91 10.91 0 0 1-2.34.2 11.35 11.35 0 0 1-3.73-.63 9 9 0 0 1-2.9-1.67 7.41 7.41 0 0 1-2.53-5.73 7.57 7.57 0 0 1 3.21-6.45c2.11-1.51 5.23-2.23 9.37-2.18h3.81V94.1a3.87 3.87 0 0 0-1.21-3 5.27 5.27 0 0 0-3.59-1.16 4.34 4.34 0 0 0-3.06.86 3.11 3.11 0 0 0-1 2.38l-6.82-.08a7.17 7.17 0 0 1 .78-3.21 8.09 8.09 0 0 1 2.22-2.65 10.89 10.89 0 0 1 3.54-1.78 15.18 15.18 0 0 1 4.76-.62 16.75 16.75 0 0 1 4.47.64 10.88 10.88 0 0 1 3.6 1.74 8 8 0 0 1 2.35 2.94 9.13 9.13 0 0 1 .81 4.08l-.16 11.39a18.69 18.69 0 0 0 .23 3.53 8.61 8.61 0 0 0 .75 2.42v.42zm-6.44-4.91a6.91 6.91 0 0 0 1.91-.22 6.83 6.83 0 0 0 1.61-.62 5.51 5.51 0 0 0 1.24-.88 4.67 4.67 0 0 0 .82-1v-4.56h-3.48a10.37 10.37 0 0 0-2.72.28 5.28 5.28 0 0 0-1.85.83 3.46 3.46 0 0 0-1.07 1.32 4.05 4.05 0 0 0-.37 1.68 3 3 0 0 0 1 2.29 4.12 4.12 0 0 0 2.91.88z"/>-->
-<!--                        <path class="typo-left-top" d="M77.28 94H54.91l-5.38 17.35H41l21.63-67h7.14l21.27 67h-8.46zm-20.07-7.44H75l-8.81-29.09z"/>-->
-<!--                    </g>-->
-<!--                </svg>-->
-<!--            </a>-->
-
-<!--            &lt;!&ndash; code &ndash;&gt;-->
-
-<!--            <a href="#" class="skill-outer code">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">-->
-<!--                    <g opacity=".87" fill="none" stroke="#fff">-->
-<!--                        <text class="text" transform="translate(58 147.5)" font-size="16" fill="#fff" stroke="none" font-family="Manpore, sans-serif" font-weight="500">-->
-<!--                            О нас-->
-<!--                        </text>-->
-<!--                        <path class="rectangle" transform="rotate(-90 80 72.12)" d="M30.57 22.69h98.86v98.86H30.57z"/>-->
-<!--                        <path class="bar" d="M45.46 121.55V22.69"/>-->
-<!--                    </g>-->
-<!--                </svg>-->
-<!--                <span class="change-letter"></span>-->
-<!--            </a>-->
-
-<!--        </div>-->
-<!--        &lt;!&ndash; /skill-set &ndash;&gt;-->
-<!--    </div>-->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.modal-btn').forEach(function (btn) {
@@ -304,4 +85,3 @@ These animations are total 18KB and only available on the Chrome desktop browser
     });
 </script>
 {% endfragment %}
-

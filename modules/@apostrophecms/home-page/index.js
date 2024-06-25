@@ -50,7 +50,8 @@ module.exports = {
             'clients': {},
             'custom-text': {},
             'faq': {},
-            'offers': {}
+            'offers': {},
+            'article': {}
           }
         }
       }
