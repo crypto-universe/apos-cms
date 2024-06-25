@@ -1,27 +1,60 @@
-{% import 'fragments.html' as fragments with context %}
+{#
+This is an example home page template. It inherits and extends a layout template
+that lives in the top-level views/ folder for convenience
+#}
 
 {% extends "layout.html" %}
+
+{% import 'fragments.html' as fragments with context %}
 {% set article = data.piece %}
 
 {% block pageTitle %}
-  <div class="article-title-wrapper">
-    <div class="inner">
-      {% set title = data.page.title %}
-      {% if data.piece %}
-        {% set title = data.piece.title %}
-      {% endif %}
-      <h1 class="page-title">{{ title }}</h1>
-    </div>
-    <div class="inner article-topics">
-      {% if article._topics and article._topics.length > 0 %}
-        {% render fragments.topicsList(article._topics) %}
-      {% endif %}
-    </div>
+<div class="article-title-wrapper">
+  <div class="inner">
+    {% set title = data.page.title %}
+    {% if data.piece %}
+    {% set title = data.piece.title %}
+    {% endif %}
+    <h1 class="page-title">{{ title }}</h1>
   </div>
+  <div class="inner article-topics">
+    {% if article._topics and article._topics.length > 0 %}
+    {% render fragments.topicsList(article._topics) %}
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
 
 {% block main %}
-  <article class="article-show general-content">
-    {% area article, 'main' %}
-  </article>
+<section>
+  <div class="container inner-page text-page">
+    <button class="sidebar-toggle">☰</button>
+    <div class="intro">
+      <h1 class="header__title">{{ article.title }}</h1>
+    </div>
+    <div class="sidebar-container">
+      <div class="sidebar-wrapper">
+        <div class="sidebar">
+          <div class="reading-progress-container">
+            <div class="reading-progress-bar"></div>
+          </div>
+        </div>
+        <div class="author-box">
+          <img src="https://new.agenc.io/uploads/attachments/clxac2p8g000zfyijg99egc47-logo.svg" alt="Author's Gravatar"
+               class="author-gravatar">
+          <div class="author-info">
+            <span class="author-title">Автор</span>
+            <span class="author-name">Леонид</span>
+          </div>
+          <span id="dark-mode-toggle" class="material-symbols-outlined light-icon"> </span>
+        </div>
+      </div>
+      <div class="post-content">
+        {% area article, 'main' %}
+      </div>
+    </div>
+    <div class="outro">
+    </div>
+  </div>
+</section>
 {% endblock %}

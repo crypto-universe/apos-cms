@@ -1,6 +1,6 @@
 {#
-  Use this template to build out your 404 error pages. Like page templates,
-  it inherits a global layout.
+Use this template to build out your 404 error pages. Like page templates,
+it inherits a global layout.
 #}
 
 {% extends "layout.html" %}
@@ -9,8 +9,14 @@
 
 {% block main %}
 <section class="footer-form flex">
-  <div class="footer-form__lefts">
-    We're sorry. We couldn't find the page you're looking for.
-  </div>
+    <div class="footer-form__lefts">
+        <div class="container  inner-page">
+            <div class="inner-page__wrap">
+                <div class="inner-page__aside"><h1 class="inner-page__title">404</h1></div>
+                <div class="inner-page__cont"><p>Кажется что-то сломалось. Мы уже в курсе и мы пытаемся найти
+                    страницу. <a href="/">Вернуться на главную</a></p></div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}

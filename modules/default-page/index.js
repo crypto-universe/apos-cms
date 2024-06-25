@@ -51,7 +51,7 @@ module.exports = {
               },
               charCountConfig: {
                 // How X!
-                limit: 280
+                limit: 3000
               }
             },
             '@apostrophecms/image': {},

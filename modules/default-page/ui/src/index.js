@@ -35,11 +35,12 @@ export default () => {
     });
 
     const sidebar = document.querySelector(".sidebar");
-    const readingProgressContainer = document.querySelector(
-        ".reading-progress-container"
-    );
-    const headers = document.querySelectorAll(".post-content :is(h1, h2, h3)");
+    const readingProgressContainer = document.querySelector(".reading-progress-container");
 
+    // Clear existing sidebar links to prevent duplication
+    sidebar.querySelectorAll(".sidebar-link").forEach(link => link.remove());
+
+    const headers = document.querySelectorAll(".post-content :is(h1, h2, h3)");
     headers.forEach((header, index) => {
       const headerId = header.id || `header${index + 1}`;
       header.id = headerId;
@@ -92,9 +93,7 @@ export default () => {
         }
       });
 
-      const firstHeader = document.querySelector(
-          ".post-content :is(h1, h2, h3):first-of-type"
-      );
+      const firstHeader = document.querySelector(".post-content :is(h1, h2, h3):first-of-type");
       const content = document.querySelector(".post-content");
       const paragraphs = content.querySelectorAll("p");
       const lastParagraph = paragraphs[paragraphs.length - 1];
@@ -130,9 +129,4 @@ export default () => {
       }
     });
   });
-
-  console.clear()
-
-
-
 };
