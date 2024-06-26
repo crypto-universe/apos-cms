@@ -147,7 +147,7 @@ h1 {
 
 /*=== Creative Typing Text Effect Animation Style 1 ===*/
 .creative__text--animation-1 {
-    --primary-color: #00c769ed;
+    --primary-color: #00c769;
     --text-color: #ffffff;
 
     display: inline-block;
@@ -161,7 +161,7 @@ h1 {
     -webkit-text-stroke: 1px var(--primary-color);
     line-height: 1.2em;
     padding: 5px 10px;
-    animation: displayText 12s infinite;
+    animation: displayText 9s infinite;
     animation-delay: calc(-3s * var(--i));
 }
 @keyframes displayText {
@@ -207,7 +207,6 @@ h1 {
     display: inline-block;
     font-size: 4em;
     font-weight: 600;
-    padding: 0 100px;
     color: var(--text-color);
 }
 .creative__text--animation-2 span {
@@ -259,7 +258,6 @@ h1 {
     display: inline-block;
     font-size: 4em;
     font-weight: 600;
-    padding: 0 100px;
     color: var(--text-color);
 }
 .creative__text--animation-3 span {
