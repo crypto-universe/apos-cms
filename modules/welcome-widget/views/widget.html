@@ -3,7 +3,13 @@
         <span class="bg1"></span>
         <span class="bg2"></span>
         <div class="container">
-            <h1 class="header__title">{{ data.widget.title }}</h1>
+            <div class="header__title creative__text--animation-1 ">
+                Сайты для
+                <span style="--i: 0;" data-text="бизнеса">бизнеса</span>
+                <span style="--i: 1;" data-text="SEO">SEO</span>
+                <span style="--i: 2;" data-text="стартапа">стартапа</span>
+                <span style="--i: 3;" data-text="крипты">крипты</span>
+            </div>
             <div class="header__descr">
                 {% area data.widget, 'description' %}
             </div>

@@ -41,6 +41,282 @@ textarea {
     font-family: 'Manpore', sans-serif;
 }
 
+/*========================================
+ * Plugin Name           : Creative Typing Text Effects Animation - HTML CSS
+ * Author Name           : Epic_Theme
+ * Author URI            : https://codecanyon.net/user/epic_theme/
+ * Created Date          : 12 June 2024
+ * Version               : 1.0
+ * File Name             : styles.css
+ *========================================*/
+
+
+/*=============== GOOGLE FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+
+    /*========== Colors ==========*/
+    /*Color mode HSL(hue, saturation, lightness)*/
+    --white-color: hsl(0, 0%, 100%);
+    --black-color: hsl(0, 0%, 0%);
+
+    /*========== Font and typography ==========*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --body-font: "Poppins", sans-serif;
+    --h1-font-size: 1.5rem;
+    --normal-font-size: .938rem;
+
+    /*========== Font weight ==========*/
+    --font-regular: 400;
+    --font-medium: 500;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 968px) {
+    :root {
+        --normal-font-size: 1rem;
+    }
+}
+
+/*=============== BASE ===============*/
+*,
+*:after,
+*:before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+h1 {
+    color: var(--white-color);
+    margin-top: 6rem;
+    font-size: 4em;
+    -webkit-text-stroke: 1px var(--primary-color);
+    color: rgba(255, 255, 255, 0.1);
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+/*.container {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}*/
+.section__container {
+    --white-color: #ffffff;
+    --dark-color: #262626;
+    --dark-color-alt: #333333;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--dark-color);
+    background-image: linear-gradient(to right, var(--dark-color-alt) 1px, transparent 1px), linear-gradient(to bottom, var(--dark-color-alt) 1px, transparent 1px);
+    background-size: 4vh 4vh;
+}
+
+/*==================== Creative Typing Text Effects Animation ====================*/
+
+/*=== Creative Typing Text Effect Animation Style 1 ===*/
+.creative__text--animation-1 {
+    --primary-color: #00c769ed;
+    --text-color: #ffffff;
+
+    display: inline-block;
+    font-size: 4em;
+    font-weight: 600;
+    color: var(--text-color);
+}
+.creative__text--animation-1 span {
+    position: relative;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--primary-color);
+    line-height: 1.2em;
+    padding: 5px 10px;
+    animation: displayText 12s infinite;
+    animation-delay: calc(-3s * var(--i));
+}
+@keyframes displayText {
+    0% {
+        display: inline-block;
+    }
+    25%, 100% {
+        display: none;
+    }
+}
+.creative__text--animation-1 span::before {
+    content: attr(data-text);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 0;
+    height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border-right: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    animation: animate 3s linear infinite;
+    filter: drop-shadow(0 0 5px var(--primary-color)) drop-shadow(0 0 25px var(--primary-color));
+}
+@keyframes animate {
+    0%, 10%, 100% {
+        width: 0;
+    }
+    70%, 90% {
+        width: 100%;
+    }
+}
+
+/*=== Creative Typing Text Effect Animation Style 2 ===*/
+.creative__text--animation-2 {
+    --primary-color: #01fe87;
+    --text-color: #ffffff;
+    --text-color-transparent: rgba(255, 255, 255, 0.1);
+
+    display: inline-block;
+    font-size: 4em;
+    font-weight: 600;
+    padding: 0 100px;
+    color: var(--text-color);
+}
+.creative__text--animation-2 span {
+    position: relative;
+    color: var(--text-color-transparent);
+    animation: displayText-2 12s infinite;
+    animation-delay: calc(-3s * var(--i));
+}
+@keyframes displayText-2 {
+    0% {
+        display: inline-block;
+    }
+    25%, 100% {
+        display: none;
+    }
+}
+.creative__text--animation-2 span::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-right: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    animation: animate-2 3s linear infinite;
+    filter: drop-shadow(0 0 5px var(--primary-color)) drop-shadow(0 0 25px var(--primary-color));
+}
+@keyframes animate-2 {
+    0%, 10%, 100% {
+        width: 0;
+    }
+    70%, 90% {
+        width: 100%;
+    }
+}
+
+/*=== Creative Typing Text Effect Animation Style 3 ===*/
+.creative__text--animation-3 {
+    --primary-color: #01fe87;
+    --text-color: #ffffff;
+    --text-color-transparent: rgba(255, 255, 255, 0.1);
+    --gradient-color-1: #CC98FF;
+    --gradient-color-2: #00AFFA;
+    --gradient-color-3: #0190CD;
+    --gradient-color-4: #FC96FF;
+
+    display: inline-block;
+    font-size: 4em;
+    font-weight: 600;
+    padding: 0 100px;
+    color: var(--text-color);
+}
+.creative__text--animation-3 span {
+    position: relative;
+    color: var(--text-color-transparent);
+    animation: displayText-3 12s infinite;
+    animation-delay: calc(-3s * var(--i));
+}
+@keyframes displayText-3 {
+    0% {
+        display: inline-block;
+    }
+    25%, 100% {
+        display: none;
+    }
+}
+.creative__text--animation-3 span::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(
+                    to right,
+                    var(--gradient-color-1) 20%,
+                    var(--gradient-color-2) 30%,
+                    var(--gradient-color-3) 70%,
+                    var(--gradient-color-4) 80%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: trannparent;
+    background-size: 500% auto;
+    border-right: 2px solid var(--gradient-color-1);
+    color: transparent;
+    animation: animate-3 3s linear infinite, animate-text 4s ease-in-out infinite alternate;
+}
+@keyframes animate-3 {
+    0%, 10%, 100% {
+        width: 0;
+    }
+    70%, 90% {
+        width: 100%;
+    }
+}
+@keyframes animate-text {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+
 body {
 font-family: 'Manpore', sans-serif;
 font-weight: normal;
@@ -236,6 +512,8 @@ button,input[type="submit"] {
 .article-footer a {
     color: #fff;
     text-align: left;
+    font-weight: 300;
+    font-size: 18px;
 }
 
 .article-footer .author-info a {

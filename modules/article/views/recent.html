@@ -10,6 +10,12 @@
       <h3><a href="{{ article._url }}">{{ article.title }}</a></h3>
 
       <article>
+          {% set imageObject = apos.attachment.first(article.image) %}
+          {% if article.image %}
+          <img class="news__img"  src="{{ apos.attachment.url(imageObject) }}" alt="{{ imageObject._alt }}" />
+          {% else %}
+          <img class="news__img"  src="/img/news/default-img.jpg" alt="" />
+          {% endif %}
         {% if not apos.area.isEmpty(article, 'blurb') %}
            <p class="article-blurb">{% area article, 'blurb' %}</p>
         {% else %}

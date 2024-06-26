@@ -9,7 +9,13 @@
 
 {% fragment indexItem(article) %}
 <div class="article-excerpt">
-  <p> {{ topic.createdAt | date('MMMM D, YYYY') }}</p>
+  {% set imageObject = apos.attachment.first(article.image) %}
+  {% if article.image %}
+  <img class="news__img"  src="{{ apos.attachment.url(imageObject) }}" alt="{{ imageObject._alt }}" />
+  {% else %}
+  <img class="news__img"  src="/img/news/default-img.jpg" alt="" />
+  {% endif %}
+  <p> {{ article.createdAt | date('MMMM D, YYYY') }}</p>
   {% if article._topics and article._topics.length > 0 %}
   {% render topicsList(article._topics) %}
   {% endif %}

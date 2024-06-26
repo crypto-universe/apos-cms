@@ -15,6 +15,16 @@ module.exports = {
           }
         }
       },
+      image: {
+        label: 'Article photo',
+        type: 'area',
+        options: {
+          max: 1,
+          widgets: {
+            '@apostrophecms/image': {}
+          }
+        }
+      },
       _topics: {
         label: 'Article topics',
         type: 'relationship',
@@ -91,7 +101,8 @@ module.exports = {
         label: 'Basics',
         fields: [
           'title',
-          'blurb'
+          'blurb',
+          'image'
         ]
       },
       main: {
