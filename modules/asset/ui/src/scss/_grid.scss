@@ -50,6 +50,18 @@
     }
 }
 
+@media (max-width: 568px) {
+    .header__descr {
+        color: #fff;
+        opacity: .9;
+        max-width: 300px;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 23px;
+        margin-top: 10px;
+    }
+}
+
 .bg1 {
     position: absolute;
     width: 1053px;
@@ -615,7 +627,6 @@ input.form__link {
     margin-top: 238px;
     &__wrap {
         width: 100%;
-        max-width: 700px;
         margin-left: auto;
     }
     &__item {
@@ -1140,7 +1151,6 @@ top: -202.47px;
     }
     .faq {
         &__wrap {
-            max-width: 491px;
         }
     }
     .text_block_2 {
@@ -1328,8 +1338,9 @@ opacity: 1;filter: blur(100px);
             line-height: 29px;
         }
         &__descr {
-            font-size: 15px;
+            font-size: 16px;
             line-height: 113%;
+            max-width: 275px;
         }
     }
     .our-client {

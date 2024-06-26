@@ -32,6 +32,58 @@ main {
   padding-top: 3rem;
 }
 
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+}
+
+.author-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.author-details {
+  margin-left: 10px;
+}
+
+.author-details p {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.author-details small {
+  color: #777;
+}
+
+small {
+  color: #aaa;
+}
+
 .bp-header {
   display: flex;
   align-items: center;

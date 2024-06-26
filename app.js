@@ -1,7 +1,7 @@
 require('apostrophe')({
   shortName: 't-a',
   baseUrl: 'https://new.agenc.io',
-  bundles: [ '@apostrophecms/rich-text-example-extensions', '@apostrophecms/blog' ],
+  bundles: [ '@apostrophecms/rich-text-example-extensions'],
   modules: {
     // Apostrophe module configuration
     // *******************************
@@ -21,9 +21,6 @@ require('apostrophe')({
     // Paginated index of articles, and with pages for individual articles
     'article-page': {},
     topic: {},
-    '@apostrophecms/blog': {},
-    // The blog page module
-    '@apostrophecms/blog-page': {},
     '@apostrophecms/typography': {},
     '@apostrophecms/smilies': {},
     '@apostrophecms/characterCount': {},
@@ -73,7 +70,6 @@ require('apostrophe')({
     'custom-text-widget': {},
     'faq-widget': {},
     'offers-widget': {},
-    'navigation': {},
     '@apostrophecms/admin-bar': {
       options: {
         addGroups: [

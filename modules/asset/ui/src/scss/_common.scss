@@ -297,7 +297,15 @@ button,input[type="submit"] {
     color: #999;
 }
 
+.apos-modal__body {
+    .ProseMirror {
+        color: black;
+    }
 
+    .text_block_1 {
+        color: black;
+    }
+}
 
 
 
@@ -310,8 +318,7 @@ button,input[type="submit"] {
 
 
 .separator {
-    margin-left: 5px;
-    margin-right: 5px;
+
 }
 
 .grid {
@@ -2337,8 +2344,9 @@ a {
 }
 
 .breadcrumb {
-    margin-left: 15px;
-    margin-top: 5rem;
+    margin-left: 0;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
 }
 
 
@@ -2593,6 +2601,7 @@ body.dark-mode {
     margin: auto;
 }
 
+
 .intro
 {
     width: 90vw;
@@ -2608,6 +2617,7 @@ body.dark-mode {
     font-size: 14px;
     padding: 20px 0;
     line-height: 1.5;
+    display: none;
 }
 
 .sidebar-wrapper {

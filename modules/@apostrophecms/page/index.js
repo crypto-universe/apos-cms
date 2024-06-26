@@ -12,11 +12,6 @@ module.exports = {
         name: '@apostrophecms/home-page',
         label: 'Home'
       },
-      // Adding the blog page type
-      {
-        name: '@apostrophecms/blog-page',
-        label: 'Blog Page'
-      },
       {
         name: 'article-page',
         label: 'Article Index'
