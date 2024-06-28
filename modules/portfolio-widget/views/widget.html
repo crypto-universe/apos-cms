@@ -7,7 +7,7 @@
                 {% for image in data.widget.portfolioItems %}
                 {% set background = apos.image.first(image) %}
                 <div id="{{ image._id }}" class="reviews__item reviews__item__more_addditional write__item write__item1 swiper-slide flex" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                    <div itemprop="contentUrl" class="image-gallery__{{ background.extension }}">
+                    <div class="image-gallery__{{ background.extension }}">
                         <div class="portfolio-details">
                             <div class="reviews__left image_item_preview">
                                 <a href="{{ image.url }}"><img src="{{ apos.attachment.url(background, {size: 'full' }) }}" alt="{{ image.title }}"></a>

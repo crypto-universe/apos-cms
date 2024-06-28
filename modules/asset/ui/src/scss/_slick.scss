@@ -147,44 +147,75 @@
 }
 
 .button-arrow {
-    background: #cad2c5;
+    background: #151619ed;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
+    width: 46px;
+    height: 46px;
     color: #2f3e46;
     cursor: pointer;
     transition: background-color 250ms ease 0s;
+}
 
-    &:hover {
-        background: lighten(#cad2c5, 10%);
-    }
+.button-arrow:hover {
+    background: lighten(#151619ed, 20%);
 }
 
 .swiper-button-arrows {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
     .button-arrow {
-        position: absolute;
+        display: none;
+        position: relative;
         top: 50%;
         transform: translateY(-50%);
         z-index: 3;
+
         &--prev {
             left: 0.5rem;
         }
+
         &--next {
             right: 0.5rem;
+
             .button-arrow__icon {
                 transform: rotate(180deg);
             }
         }
+
         &.swiper-button-disabled {
             opacity: 0.4;
             cursor: auto;
+
             &:hover {
                 background: #cad2c5;
             }
         }
     }
 }
+
+@media (max-width: 640px) {
+    .swiper-button-arrows {
+        justify-content: flex-start;
+        display: flex;
+
+        .button-arrow {
+            display: flex;
+            position: static;
+            transform: none;
+            margin: 0 0.5rem;
+
+            &--prev, &--next {
+                left: auto;
+                right: auto;
+            }
+        }
+    }
+}
+
 

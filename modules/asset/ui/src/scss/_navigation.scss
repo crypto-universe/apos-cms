@@ -192,7 +192,7 @@
       position: absolute;
       width: 100%;
       flex-direction: column;
-      background: rgba(21, 20, 26, 0.85);
+      background: rgba(21, 20, 26, 0.95);
     }
 
     &.active {
@@ -263,18 +263,20 @@
           margin-top: 0.25rem;
         }
       }
+      &:nth-last-child(3),
+      &:nth-last-child(2),
       &:last-child {
         margin-bottom: 0;
-        margin-right: 0;
         display: block;
+
         @media (max-width: 1050px) {
           display: none;
         }
 
         @media (max-width: 768px) {
-          border-bottom: 0;
-          display: none;
+          display: block;
         }
+
       }
       &--dropdown {
         position: relative;

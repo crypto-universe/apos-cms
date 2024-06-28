@@ -1082,6 +1082,8 @@ footer .bottom-details .bottom_text{
         margin-top: 60px;
         font-size: 20px;
         line-height: 27px;
+        margin-left: 0;
+        margin-bottom: 50px;
     }
 
     .reviews {
@@ -1313,7 +1315,7 @@ opacity: 1;filter: blur(100px);
             margin: 0;
         }
         &__title {
-            max-width: 80%;
+            max-width: 100%;
         }
         &__navigation .navigation__item:not(:first-child){
             display: none;
@@ -1334,13 +1336,13 @@ opacity: 1;filter: blur(100px);
     }
     .header {
         &__title {
-            font-size: 24px;
+            font-size: 19px;
             line-height: 29px;
         }
         &__descr {
             font-size: 16px;
-            line-height: 113%;
-            max-width: 275px;
+            line-height: 132%;
+            max-width: 100%;
         }
     }
     .our-client {
@@ -1350,7 +1352,7 @@ opacity: 1;filter: blur(100px);
             margin-bottom: 40px;
         }
         &__main-title {
-            max-width: 80%;
+            max-width: 100%;
         }
         &__btn_pc {
             display: none;
@@ -1393,9 +1395,6 @@ opacity: 1;filter: blur(100px);
             flex-direction: column;
             margin-bottom: 0;
             max-width: none;
-        }
-        &__left {
-            max-width: 100%;
         }
         &__right {
             margin-left: 0;
