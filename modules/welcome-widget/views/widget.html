@@ -4,19 +4,22 @@
         <span class="bg2"></span>
         <div class="container">
             <div class="header__title creative__text--animation-2">
-                Сайты для
-                <span style="--i: 0;" data-text="бизнеса">бизнеса</span>
-                <span style="--i: 1;" data-text="стартапа">стартапа</span>
-                <span style="--i: 2;" data-text="ресторана_кафе">ресторана_кафе</span>
-                <span style="--i: 3;" data-text="отеля_гостиницы">отеля_гостиницы</span>
+                {{ data.widget.headerTitle }}
+                {% for text in data.widget.texts %}
+                <span style="--i: {{ loop.index0 }};" data-text="{{ text.text }}">{{ text.text }}</span>
+                {% endfor %}
             </div>
+            {% if not apos.area.isEmpty(data.widget, 'description') %}
+            <p class="description-content">{% area data.widget, 'description' %}</p>
             <div class="header__descr creative__text--animation-4">
-                Любой сложности, в сжатые сроки
-                <a href="#" style="--i: 0;" data-text="#Создание_сайта">#Создание_сайта</a>
-                <a href="#" style="--i: 1;" data-text="#Разработка_приложения">#Разработка_приложения</a>
-                <a href="#" style="--i: 2;" data-text="#Техническое_сопровождение">#Техническое_сопровождение</a>
-                <a href="#" style="--i: 3;" data-text="#ПРОдвижение_SEO">#ПРОдвижение_SEO</a>
+                {% for hashtag in data.widget.hashtags %}
+                <a href="{{ hashtag._hashtagLink[0].slug }}" style="--i: {{ loop.index0 }};" data-text="{{ hashtag.hashtag }}">{{ hashtag.hashtag }}</a>
+                {% endfor %}
             </div>
+            {% else %}
+            <p class="placeholder">No description available</p>
+            {% endif %}
+
             <a href="{{ data.widget.buttonLink }}" class="header__btn scroll">{{ data.widget.buttonText }}</a>
         </div>
     </div>

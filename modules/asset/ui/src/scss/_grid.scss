@@ -3,7 +3,7 @@
 
     &__title {
         margin-top: 5px;
-        font-size: 64px;
+        font-size: 65px;
         line-height: 88px;
         font-weight: 500;
         letter-spacing: -0.04em;
@@ -295,6 +295,7 @@
     text-transform: uppercase;
     color: #FFFFFF;
     opacity: 0.8;
+    margin-bottom: 50px;
 }
 
 .reviews {
@@ -388,7 +389,7 @@
     }
     &__link {
         display: block;
-        padding: 10px 20px;
+        padding: 5px 10px;
         font-weight: 500;
         font-size: 16px;
         line-height: 102%;

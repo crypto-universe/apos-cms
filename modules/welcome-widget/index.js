@@ -10,28 +10,56 @@ module.exports = {
   },
   fields: {
     add: {
-      title: {
+      headerTitle: {
         type: 'string',
-        label: 'Title',
+        label: 'Header Title',
         required: true
+      },
+      descTitle: {
+        type: 'string',
+        label: 'Description Title',
+        required: true
+      },
+      texts: {
+        type: 'array',
+        label: 'Texts',
+        titleField: 'text',
+        fields: {
+          add: {
+            text: {
+              type: 'string',
+              label: 'Text',
+              required: true
+            }
+          }
+        }
       },
       description: {
         type: 'area',
         label: 'Description',
         options: {
           widgets: {
-            '@apostrophecms/rich-text': {
-              toolbar: [
-                'styles',
-                '|',
-                'bold',
-                'italic',
-                'strike',
-                'link',
-                '|',
-                'bulletList',
-                'orderedList'
-              ]
+            '@apostrophecms/rich-text': {},
+            '@apostrophecms/image': {}
+          }
+        },
+        required: true
+      },
+      hashtags: {
+        type: 'array',
+        label: 'Hashtags',
+        titleField: 'hashtag',
+        fields: {
+          add: {
+            hashtag: {
+              type: 'string',
+              label: 'Hashtag',
+              required: true
+            },
+            _hashtagLink: {
+              type: 'relationship',
+              withType: '@apostrophecms/page',
+              required: true
             }
           }
         },
