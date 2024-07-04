@@ -1,5 +1,58 @@
+const fetch = require('node-fetch');
+
 module.exports = {
   extend: '@apostrophecms/piece-type',
+  options: {
+    label: 'Article',
+    pluralLabel: 'Articles',
+    perPage: 2,
+    publicApiProjection: {
+      title: 1,
+      _url: 1,
+      image: 1
+    }
+  },
+  handlers(self) {
+    return {
+      'apostrophe:modulesReady': {
+        addRoutes() {
+          self.apos.app.get('/modules/article/search', async (req, res) => {
+            const searchQuery = req.query.search || '';
+
+            // Internal search
+            const internalArticles = await self.find(req, {
+              title: new RegExp(searchQuery, 'i')
+            }).toArray();
+
+            // External API search
+            let externalArticles = [];
+            try {
+              const response = await fetch(`https://new.agenc.io/api/v1/article?page=1&search=${searchQuery}`);
+              const data = await response.json();
+              externalArticles = data.results;
+            } catch (error) {
+              console.error('Error fetching external articles:', error);
+            }
+
+            // Combine results
+            const combinedArticles = [...internalArticles, ...externalArticles];
+
+            const rows = combinedArticles.map(article => `
+              <tr>
+                <td>${req.query.page || 1}</td>
+                <td><a href="${article._url || `https://new.agenc.io/articles/${article.slug}`}">Link</a></td>
+                <td>${article.title}</td>
+                <td>${article.slug}</td>
+                <td>${new Date(article.createdAt || article.cacheInvalidatedAt).toLocaleDateString()}</td>
+              </tr>
+            `).join('');
+
+            res.send(rows);
+          });
+        }
+      }
+    };
+  },
   fields: {
     add: {
       blurb: {
@@ -83,16 +136,13 @@ module.exports = {
                 'image',
               ],
               typoConfig: {
-                // Will no longer convert `(tm)` to ™
                 trademark: false,
-                // Will convert `->` to `=>`
                 rightArrow: '=>'
               },
               smiliesConfig: {
                 tone: 2
               },
               charCountConfig: {
-                // How X!
                 limit: 3000
               }
             },

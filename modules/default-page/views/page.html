@@ -1,9 +1,62 @@
-{#
-This is an example home page template. It inherits and extends a layout template
-that lives in the top-level views/ folder for convenience
-#}
-
 {% extends "layout.html" %}
+{% block extraHead %}
+<style>
+    .overall-score, .content-length, .reading-time {
+        font-size: 2em;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .overall-score span, .content-length span, .reading-time span {
+        font-size: 2.5em;
+        color: #4CAF50; /* Google PageSpeed green */
+    }
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: 'Arial', sans-serif;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+    .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+    }
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+    }
+    .styled-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #121212;
+    }
+    .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+    }
+</style>
+<script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+            fetch('/modules/default-page/report', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: window.location.href })
+            })
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector('#report-results').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        }, 1000);
+    });
+</script>
+{% endblock %}
 
 {% block main %}
 <section>
@@ -38,6 +91,12 @@ that lives in the top-level views/ folder for convenience
         <div class="outro">
         </div>
     </div>
-
 </section>
+
+<section hx-trigger="load">
+    <button class="header__btn" id="generate-report" hx-post="/modules/default-page/report" hx-vals='{"url": "{{ data.page._url | escape }}"}' hx-target="#report-results">Генеририровать отчет</button>
+    <div id="report-results" class="report-results">
+    </div>
+</section>
+
 {% endblock %}

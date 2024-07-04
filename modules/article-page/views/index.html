@@ -2,30 +2,54 @@
 {% import 'fragments.html' as fragments with context %}
 
 {% extends "layout.html" %}
+{% block extraHead %}
+<script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+{% endblock %}
 
 {% block pageTitle %}
-  <div class="article-title-wrapper">
-    <div class="inner">
-      {% set title = data.page.title %}
-      {% if data.piece %}
-        {% set title = data.piece.title %}
-      {% endif %}
-      <h1 class="page-title">{{ title }}</h1>
-    </div>
+<div class="article-title-wrapper">
+  <div class="inner">
+    {% set title = data.page.title %}
+    {% if data.piece %}
+    {% set title = data.piece.title %}
+    {% endif %}
+    <h1 class="page-title">{{ title }}</h1>
   </div>
+</div>
 {% endblock %}
 
 {% block main %}
-  <section class="article-index">
-    <header class="article-intro general-content">
-      {% area data.page, 'intro' %}
-    </header>
-    <div class="article-excerpts">
-      {% for article in data.pieces %}
-        {% render fragments.indexItem(article) %}
-      {% endfor %}
-    </div>
-    {{ pager.render({ page: data.currentPage, total: data.totalPages }, data.url) }}
-  </section>
+<section class="article-index">
+  <header class="article-intro general-content">
+    {% area data.page, 'intro' %}
+  </header>
+  <div class="article-excerpts">
+    {% for article in data.pieces %}
+    {% render fragments.indexItem(article) %}
+    {% endfor %}
+  </div>
+  {{ pager.render({ page: data.currentPage, total: data.totalPages }, data.url) }}
+</section>
+
+<section>
+  <input type="text" id="search-input" placeholder="Search Flutter Articles"
+         hx-get="/modules/article/search"
+         hx-trigger="keyup changed delay:2s"
+         hx-target="#search-results"
+         hx-params="*">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Current Page</th>
+      <th>Link</th>
+      <th>Title</th>
+      <th>Relative Slug</th>
+      <th>Creation Date</th>
+    </tr>
+    </thead>
+    <tbody id="search-results">
+    </tbody>
+  </table>
+</section>
 
 {% endblock %}
