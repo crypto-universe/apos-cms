@@ -126,7 +126,7 @@ module.exports = {
               const result = data.data;
               const overallScore = Math.round(result.result);
               const contentLength = result.results.content_length.value;
-              const readingTime = (contentLength / 200).toFixed(2);
+              const readingTime = (contentLength / 230).toFixed(0);
 
               const failedResults = Object.entries(result.results).filter(([key, value]) => value.passed === false);
 
@@ -139,14 +139,11 @@ module.exports = {
               `).join('');
 
               const responseData = `
-                <div class="overall-score">
-                  SEO рейтинг: <span>${overallScore}</span>
-                </div>
-                <div class="content-length">
-                  Длина контента: ${contentLength} слов
-                </div>
                 <div class="reading-time">
-                  Среднее время чтения: ${readingTime} минут
+                  Время чтения: ${readingTime} минут-(ы)
+                </div>
+                <div class="overall-score">
+                  Рейтинг: <span>${overallScore}</span>
                 </div>
               `;
 

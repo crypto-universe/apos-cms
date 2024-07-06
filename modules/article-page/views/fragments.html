@@ -1,14 +1,14 @@
 {% fragment topicsList(topics) %}
-<ul class="article-topics meta">
+<div class="article-topics meta">
   {% for topic in topics %}
-  <li>{{ topic.title }}</li>
-
+  <div class="topic">{{ topic.title }}</div>
   {% endfor %}
-</ul>
+</div>
 {% endfragment %}
 
 {% fragment indexItem(article) %}
 <div class="article-excerpt">
+  <a href="{{ article._url }}">
   {% set imageObject = apos.attachment.first(article.image) %}
   {% if article.image %}
   <img class="news__img"  src="{{ apos.attachment.url(imageObject) }}" alt="{{ imageObject._alt }}" />
@@ -28,5 +28,7 @@
   {% else %}
   <p class="placeholder">No blurb for this article</p>
   {% endif %}
+  </a>
 </div>
+
 {% endfragment %}

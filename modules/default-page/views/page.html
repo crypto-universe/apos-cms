@@ -2,12 +2,12 @@
 {% block extraHead %}
 <style>
     .overall-score, .content-length, .reading-time {
-        font-size: 2em;
-        text-align: center;
-        margin-top: 20px;
+        font-size: 14px;
+        text-align: left;
+        margin-top: 10px;
     }
     .overall-score span, .content-length span, .reading-time span {
-        font-size: 2.5em;
+        font-size: 14px;
         color: #4CAF50; /* Google PageSpeed green */
     }
     .styled-table {
@@ -71,13 +71,15 @@
                     <div class="reading-progress-container">
                         <div class="reading-progress-bar"></div>
                     </div>
+                    <div hx-trigger="load" id="report-results" class="report-results">
+                    </div>
                 </div>
                 <div class="author-box">
                     <img src="https://new.agenc.io/uploads/attachments/clxac2p8g000zfyijg99egc47-logo.svg" alt="Author's Gravatar"
                          class="author-gravatar">
                     <div class="author-info">
-                        <span class="author-title">Автор</span>
-                        <span class="author-name">Леонид</span>
+                        <span class="author-title">В.А</span>
+                        <span class="author-name">ТехноАгенсио</span>
                     </div>
 
                     <span id="dark-mode-toggle" class="material-symbols-outlined light-icon"> </span>
@@ -93,10 +95,5 @@
     </div>
 </section>
 
-<section hx-trigger="load">
-    <button class="header__btn" id="generate-report" hx-post="/modules/default-page/report" hx-vals='{"url": "{{ data.page._url | escape }}"}' hx-target="#report-results">Генеририровать отчет</button>
-    <div id="report-results" class="report-results">
-    </div>
-</section>
 
 {% endblock %}
