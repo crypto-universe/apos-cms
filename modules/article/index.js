@@ -5,39 +5,35 @@ module.exports = {
   options: {
     label: 'Article',
     pluralLabel: 'Articles',
-    perPage: 2,
+    perPage: 100,
     publicApiProjection: {
       title: 1,
       _url: 1,
-      image: 1
+      image: 1,
+      _topics: 1
     }
   },
   handlers(self) {
     return {
       'apostrophe:modulesReady': {
         addRoutes() {
-          self.apos.app.get('/modules/article/search', async (req, res) => {
-            const searchQuery = req.query.search || '';
+          self.apos.app.get('/article/relation', async (req, res) => {
+            let articles = [];
+            const searchTopic = req.query.topic || 'Develop';
 
-            // Internal search
-            const internalArticles = await self.find(req, {
-              title: new RegExp(searchQuery, 'i')
-            }).toArray();
-
-            // External API search
-            let externalArticles = [];
             try {
-              const response = await fetch(`https://new.agenc.io/api/v1/article?page=1&search=${searchQuery}`);
+              const response = await fetch(`https://new.agenc.io/api/v1/article`);
               const data = await response.json();
-              externalArticles = data.results;
+              articles = data.results;
+
+              articles = articles.filter(article => {
+                return article._topics && article._topics.some(topic => topic.title.includes(searchTopic));
+              });
             } catch (error) {
-              console.error('Error fetching external articles:', error);
+              console.error('Error fetching articles:', error);
             }
 
-            // Combine results
-            const combinedArticles = [...internalArticles, ...externalArticles];
-
-            const rows = combinedArticles.map(article => `
+            const rows = articles.map(article => `
               <tr>
                 <td>${req.query.page || 1}</td>
                 <td><a href="${article._url || `https://new.agenc.io/articles/${article.slug}`}">Link</a></td>
@@ -63,7 +59,7 @@ module.exports = {
           max: 1,
           widgets: {
             '@apostrophecms/rich-text': {
-              toolbar: [ 'bold', 'italic' ]
+              toolbar: ['bold', 'italic']
             }
           }
         }

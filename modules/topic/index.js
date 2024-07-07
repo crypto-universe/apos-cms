@@ -1,5 +1,9 @@
 module.exports = {
   extend: '@apostrophecms/piece-type',
+  options: {
+    label: 'Topic',
+    pluralLabel: 'Topics'
+  },
   fields: {
     add: {
       string: {

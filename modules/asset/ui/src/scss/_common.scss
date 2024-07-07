@@ -2902,27 +2902,6 @@ body.dark-mode {
     margin-top: 0px;
 }
 
-#dark-mode-toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 10px;
-    cursor: pointer;
-    color: var(--lightbulb-color);
-    font-size: 2rem;
-    transition: 350ms;
-}
-
-#dark-mode-toggle:hover {
-    transform: scale(1.1);
-}
-
-#dark-mode-toggle:active {
-    transform: scale(0.9);
-    transition: transform 100ms;
-}
-
 .post-content {
     margin: 0px 0px 0px 35px;
 }

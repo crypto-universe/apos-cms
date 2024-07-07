@@ -60,15 +60,6 @@ module.exports = {
               const contentLength = result.results.content_length.value;
               const readingTime = (contentLength / 230).toFixed(0);
 
-              const failedResults = Object.entries(result.results).filter(([key, value]) => value.passed === false);
-
-              const rows = failedResults.map(([key, value]) => `
-                <tr>
-                  <td>${key}</td>
-                  <td>${value.importance}</td>
-                  <td>${value.errors ? JSON.stringify(value.errors) : 'N/A'}</td>
-                </tr>
-              `).join('');
 
               const responseData = `
                 <div class="reading-time">
