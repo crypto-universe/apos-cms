@@ -1,7 +1,9 @@
 {% fragment topicsList(topics) %}
 <div class="article-topics meta">
   {% for topic in topics %}
-  <div class="topic">{{ topic.title }}</div>
+  <div class="topic">
+    <a class="topic-button" href="/article/relation?topic={{ topic.title }}">{{ topic.title }}</a>
+  </div>
   {% endfor %}
 </div>
 {% endfragment %}
@@ -9,26 +11,24 @@
 {% fragment indexItem(article) %}
 <div class="article-excerpt">
   <a href="{{ article._url }}">
-  {% set imageObject = apos.attachment.first(article.image) %}
-  {% if article.image %}
-  <img class="news__img"  src="{{ apos.attachment.url(imageObject) }}" alt="{{ imageObject._alt }}" />
-  {% else %}
-  <img class="news__img"  src="/img/news/default-img.jpg" alt="" />
-  {% endif %}
-  <p> {{ article.createdAt | date('MMMM D, YYYY') }}</p>
-  {% if article._topics and article._topics.length > 0 %}
-  {% render topicsList(article._topics) %}
-  {% endif %}
-  <h2>
-    <a href="{{ article._url }}">{{ article.title }}</a>
-
-  </h2>
-  {% if not apos.area.isEmpty(article, 'blurb') %}
-  <p class="article-blurb">{% area article, 'blurb' %}</p>
-  {% else %}
-  <p class="placeholder">No blurb for this article</p>
-  {% endif %}
+    {% set imageObject = apos.attachment.first(article.image) %}
+    {% if article.image %}
+    <img class="news__img" src="{{ apos.attachment.url(imageObject) }}" alt="{{ imageObject._alt }}" />
+    {% else %}
+    <img class="news__img" src="/img/news/default-img.jpg" alt="" />
+    {% endif %}
+    <p>{{ article.createdAt | date('MMMM D, YYYY') }}</p>
+    {% if article._topics and article._topics.length > 0 %}
+    {% render topicsList(article._topics) %}
+    {% endif %}
+    <h2>
+      <a href="{{ article._url }}">{{ article.title }}</a>
+    </h2>
+    {% if not apos.area.isEmpty(article, 'blurb') %}
+    <p class="article-blurb">{% area article, 'blurb' %}</p>
+    {% else %}
+    <p class="placeholder">No blurb for this article</p>
+    {% endif %}
   </a>
 </div>
-
 {% endfragment %}

@@ -19,7 +19,7 @@ module.exports = {
         addRoutes() {
           self.apos.app.get('/article/relation', async (req, res) => {
             let articles = [];
-            const searchTopic = req.query.topic || 'Develop';
+            const searchTopic = req.query.topic;
 
             try {
               const response = await fetch(`https://new.agenc.io/api/v1/article`);
