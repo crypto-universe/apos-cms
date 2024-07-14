@@ -17,9 +17,10 @@ module.exports = {
     return {
       'apostrophe:modulesReady': {
         addRoutes() {
-          self.apos.app.get('/article/relation', async (req, res) => {
+          self.apos.app.get('/articles/relation', async (req, res) => {
             let articles = [];
-            const searchTopic = req.query.topic;
+            const searchTopic = req.query.topic || 'Develop';
+            const excludeId = req.query.exclude;
 
             try {
               const response = await fetch(`https://new.agenc.io/api/v1/article`);
@@ -27,7 +28,8 @@ module.exports = {
               articles = data.results;
 
               articles = articles.filter(article => {
-                return article._topics && article._topics.some(topic => topic.title.includes(searchTopic));
+                return article._topics && article._topics.some(topic => topic.title.includes(searchTopic)) &&
+                    article._id !== excludeId;
               });
             } catch (error) {
               console.error('Error fetching articles:', error);
@@ -36,10 +38,7 @@ module.exports = {
             const rows = articles.map(article => `
               <tr>
                 <td>${req.query.page || 1}</td>
-                <td><a href="${article._url || `https://new.agenc.io/articles/${article.slug}`}">Link</a></td>
-                <td>${article.title}</td>
-                <td>${article.slug}</td>
-                <td>${new Date(article.createdAt || article.cacheInvalidatedAt).toLocaleDateString()}</td>
+                <td><a href="${article._url}">${article.title}</a></td>
               </tr>
             `).join('');
 

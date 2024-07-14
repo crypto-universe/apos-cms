@@ -1,8 +1,3 @@
-{#
-This is an example home page template. It inherits and extends a layout template
-that lives in the top-level views/ folder for convenience
-#}
-
 {% extends "layout.html" %}
 
 {% import 'fragments.html' as fragments with context %}
@@ -78,6 +73,16 @@ that lives in the top-level views/ folder for convenience
                 document.querySelector('#report-results').innerHTML = html;
               })
               .catch(error => console.error('Error:', error));
+
+      // Additional fetch call to the new URL with dynamic topic parameter
+      fetch('/articles/relation?topic={{ article._topics[0].title | urlencode }}&exclude={{ article._id }}', {
+        method: 'GET'
+      })
+              .then(response => response.text())
+              .then(html => {
+                document.querySelector('#related-articles').innerHTML = html;
+              })
+              .catch(error => console.error('Error:', error));
     }, 1000);
   });
 </script>
@@ -113,5 +118,7 @@ that lives in the top-level views/ folder for convenience
       </div>
     </div>
   </div>
+  <!-- Placeholder for related articles -->
+  <div id="related-articles"></div>
 </section>
 {% endblock %}
