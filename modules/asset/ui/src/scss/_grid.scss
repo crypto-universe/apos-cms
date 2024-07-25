@@ -9,7 +9,6 @@
         letter-spacing: -0.04em;
         text-transform: uppercase;
         color: #FFFFFF;
-        opacity: 0.8;
     }
 
     &__descr {
@@ -274,6 +273,7 @@
     }
     &__card-item {
         margin-bottom: 70px;
+        margin-left: 0 !important;
     }
     &__btn_mob {
         display: none;
@@ -708,7 +708,7 @@ input.form__link {
         opacity: 1;
     }
     &__item1 {
-        max-width: 496px;
+        max-width: 350px;
         width: 100%;
     }
     &__item2 {
@@ -1068,6 +1068,7 @@ footer .bottom-details .bottom_text{
         }
         &__card-item {
             margin-bottom: 20px;
+            margin-left: 0 !important;
         }
 
     }
@@ -1255,6 +1256,9 @@ height: 572.18px;
 }
 
 @media screen and (max-width:500px) {
+    h2 {
+        font-size: 16px;
+    }
     .bg1 {
         position: absolute;
         width: 272.91px;
@@ -1337,7 +1341,7 @@ opacity: 1;filter: blur(100px);
     }
     .header {
         &__title {
-            font-size: 19px;
+            font-size: 21px;
             line-height: 29px;
         }
         &__descr {
@@ -1360,7 +1364,7 @@ opacity: 1;filter: blur(100px);
         }
         &__item2,
         &__item3 {
-            max-width: calc(50% - 15px);
+            max-width: calc(50% - 0px);
             margin: 0;
         }
         &__item3 {
@@ -1368,6 +1372,7 @@ opacity: 1;filter: blur(100px);
         }
         &__card-item {
             margin-bottom: 30px;
+            margin-left: 0 !important;
         }
         &__card-descr {
             min-height: 60px;

@@ -35,12 +35,14 @@ module.exports = {
               console.error('Error fetching articles:', error);
             }
 
-            const rows = articles.map(article => `
-              <tr>
-                <td>${req.query.page || 1}</td>
-                <td><a href="${article._url}">${article.title}</a></td>
-              </tr>
-            `).join('');
+            const rows = `
+              <div class="mt-15" id="related-articles">
+                <span>Рекомендуем</span>
+              </div>
+              ${articles.map(article => `
+                <a class="sidebar-link" href="${article._url}">${article.title}</a>
+              `).join('')}
+            `;
 
             res.send(rows);
           });

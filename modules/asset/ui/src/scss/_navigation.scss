@@ -67,6 +67,7 @@
       flex: 1;
       text-align: center;
       border: 0;
+      padding: 0;
     }
     &__img {
       width: 100%;
@@ -77,6 +78,7 @@
     }
     a {
       color: var(--main);
+      font-size: 16px;
     }
   }
   &__hmb {

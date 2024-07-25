@@ -14,9 +14,61 @@ main {
 
 body {
   min-height: 100vh;
-  // Nice system fonts.
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #333;
+}
+
+/* public/css/site.css */
+.container-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.products-4 {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+
+/* Для WebKit-браузеров (Chrome, Safari и т.д.) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #333;
+}
+
+/* Для прокрутки внутри определенного элемента */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #333;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: #333;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #333;
+}
+
 
 .bp-header,
 main,
@@ -139,5 +191,69 @@ small {
 @media (max-width: 1024px) {
   .bp-content {
     padding: 1rem 2rem;
+  }
+}
+
+.container-table {
+  max-height: calc(100vh - 80px);
+  overflow: auto;
+}
+
+table {
+}
+th {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+}
+td,
+th {
+  padding: 10px;
+  min-width: 200px;
+  text-align: center;
+}
+.products-4 th,
+.products-4 td {
+  width: 25%;
+}
+th {
+  background: #23222d73;
+  top: -2px;
+}
+th img {
+  height: 0;
+  margin: 0 auto;
+  display: block;
+  transition: height 200ms ease-in-out;
+}
+.sticky img {
+  height: 100px;
+}
+.label {
+  text-align: left;
+  min-width: 150px;
+  width: 150px;
+  background: #23222d73;
+}
+th.label {
+  background: #23222d73;
+}
+
+.heading {
+  background: #23222d73;
+  width: 100%;
+  text-align: left;
+  position: relative;
+}
+.heading span {
+  position: sticky;
+  top: 0;
+  left: 10px;
+}
+@media all and (max-width: 600px) {
+  body {
+    padding: 0;
+  }
+  .label {
   }
 }

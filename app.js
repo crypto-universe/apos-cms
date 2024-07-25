@@ -70,6 +70,7 @@ require('apostrophe')({
     'custom-text-widget': {},
     'faq-widget': {},
     'offers-widget': {},
+    'html-widget': {},
     '@apostrophecms/admin-bar': {
       options: {
         addGroups: [

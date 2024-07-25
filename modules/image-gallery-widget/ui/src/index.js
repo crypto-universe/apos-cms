@@ -23,9 +23,9 @@ export default () => {
           prevEl: '.button-arrow--prev',
         },
         breakpoints: {
-          640: {
+          768: {
             slidesPerView: slides,
-            spaceBetween: 0
+            spaceBetween: 5
           }
         }
       });

@@ -22,10 +22,9 @@
 }
 
 .image-gallery__swiper .swiper-slide {
-  display: block !important;
-  margin-left: 15px;
+  margin-left: 5px;
   @media screen and (max-width:568px) {
-    margin-left: 0;
+    margin-left: 5px;
   }
 }
 
@@ -35,7 +34,7 @@
 }
 
 .portfolio-details {
-  max-width: 325px;
+  max-width: 285px;
   width: 100%;
   margin-bottom: 50px;
   margin-top: 50px;

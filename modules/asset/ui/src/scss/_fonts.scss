@@ -1,9 +1,6 @@
 @font-face {
     font-family: 'Manpore';
-    src: local('Manpore Medium'), local('ManporeMedium'),
-        url('../fonts/medium.woff2') format('woff2'),
-        url('../fonts/medium.woff') format('woff'),
-        url('../fonts/medium.ttf') format('truetype');
+    src: local('Manpore Medium'), local('ManporeMedium');
     font-weight: 500;
     font-display: swap;
     font-style: normal;
@@ -12,8 +9,7 @@
 
 @font-face {
     font-family: 'Manpore';
-    src: local('Manpore Bold'), local('ManporeBold'),
-        url('../fonts/bold.ttf') format('truetype');
+    src: local('Manpore Bold'), local('ManporeBold');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -23,8 +19,7 @@
 
 @font-face {
     font-family: 'Manpore';
-    src: local('Manpore Reqular'), local('ManporeReqular'),
-        url('../fonts/regular.ttf') format('truetype');
+    src: local('Manpore Reqular'), local('ManporeReqular');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -34,8 +29,7 @@
 
 @font-face {
     font-family: 'Manpore';
-    src: local('Manpore Reqular'), local('ManporeReqular'),
-        url('../fonts/thin.ttf') format('truetype');
+    src: local('Manpore Reqular'), local('ManporeReqular');
     font-weight: 100;
     font-style: normal;
     font-display: swap;

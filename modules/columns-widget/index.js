@@ -112,7 +112,8 @@ module.exports = {
             'clients': {},
             'custom-text': {},
             'faq': {},
-            'offers': {}
+            'offers': {},
+            'html': {}
           }
         }
       },
@@ -174,7 +175,8 @@ module.exports = {
             'clients': {},
             'custom-text': {},
             'faq': {},
-            'offers': {}
+            'offers': {},
+            'html': {}
           }
         },
         if: {
@@ -249,7 +251,8 @@ module.exports = {
             'clients': {},
             'custom-text': {},
             'faq': {},
-            'offers': {}
+            'offers': {},
+            'html': {}
           }
         }
       },
