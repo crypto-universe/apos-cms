@@ -20,7 +20,12 @@
             <p class="placeholder">No description available</p>
             {% endif %}
 
-            <a href="{{ data.widget.buttonLink }}" class="header__btn scroll">{{ data.widget.buttonText }}</a>
+            <a class="header__btn scroll" href="{{ data.widget.buttonLink }}">
+            <button>
+                <span class="text">{{ data.widget.buttonText }}</span>
+                <span class="shimmer"></span>
+            </button>
+            </a>
         </div>
     </div>
 </section>

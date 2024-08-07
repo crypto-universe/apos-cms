@@ -29,24 +29,19 @@
 
     &__btn {
         display: table;
-        padding: 20px 40px;
         margin-top: 55px;
         font-weight: 700;
         font-size: 16px;
         line-height: 102%;
         letter-spacing: -0.04em;
         text-transform: uppercase;
-        color: #34386F;
-        background-color: rgba(255,255,255,0.95);
         border-radius: 60px;
         transition-property:background-color, color;
         transition-duration: 0.4s;
         transition-timing-function: ease-in-out;
     }
-    &__btn:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: #fff;
-    }
+
+
 }
 
 @media (max-width: 568px) {
@@ -217,7 +212,7 @@
 
 .title_left {
     display: block;
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 400;
     width: 195px;
     line-height: 22px;
@@ -1038,7 +1033,6 @@ footer .bottom-details .bottom_text{
         }
         &__btn {
             margin-top: 40px;
-            padding: 15px 20px;
             font-size: 12px;
             line-height: 102%;
         }
@@ -1256,6 +1250,10 @@ height: 572.18px;
 }
 
 @media screen and (max-width:500px) {
+    .container {
+        max-width: 450px;
+        padding: 0;
+    }
     h2 {
         font-size: 16px;
     }
@@ -1571,7 +1569,18 @@ opacity: 1;filter: blur(100px);
 
 }
 
+@media screen and (max-width:410px) {
+    .container {
+        max-width: 345px;
+        padding: 0;
+    }
+
+}
+
 @media screen and (max-width:330px) {
+    .container {
+        max-width: 330px;
+    }
     .bg1,
     .bg2,
     .bg3,
