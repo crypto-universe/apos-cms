@@ -3,27 +3,17 @@ export default () => {
   console.log('Нужна работа? Пиши нам 💎');
 
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const interBubble = document.querySelector('.interactive');
-    let curX = 0;
-    let curY = 0;
-    let tgX = 0;
-    let tgY = 0;
+  window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    const minTime = 1; // 1 секунда
+    const maxTime = 1.5; // 1.5 секунды
+    const loadTime = Math.random() * (maxTime - minTime) + minTime; // случайное время от 1 до 1.5 секунды
 
-    const move = () => {
-      curX += (tgX - curX) / 20;
-      curY += (tgY - curY) / 20;
-      interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-      requestAnimationFrame(move);
-    };
-
-    window.addEventListener('mousemove', (event) => {
-      tgX = event.clientX;
-      tgY = event.clientY;
-    });
-
-    move();
+    setTimeout(() => {
+      preloader.classList.add('hidden');
+    }, loadTime);
   });
+
 
   document.addEventListener("DOMContentLoaded", function () {
 

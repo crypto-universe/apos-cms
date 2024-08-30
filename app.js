@@ -15,27 +15,21 @@ require('apostrophe')({
     // `className` options set custom CSS classes for Apostrophe core widgets.
     // The main blog piece type module
     // A piece type for articles
-    article: {},
-    // Tease an article on any page
-    'article-widget': {},
-    // Paginated index of articles, and with pages for individual articles
-    'article-page': {},
-    topic: {},
-    '@apostrophecms/typography': {},
-    '@apostrophecms/smilies': {},
-    '@apostrophecms/characterCount': {},
-    '@apostrophecms/login-totp': {},
+    '@apostrophecms/sitemap': {},
     '@apostrophecms/open-graph': {},
     '@apostrophecms/piece-type-exporter': {},
     '@apostrophecms/piece-type-importer': {},
     '@apostrophecms/redirect': {},
     '@apostrophecms/scheduled-publishing': {},
     '@apostrophecms/seo': {},
-    '@apostrophecms/sitemap': {},
     '@apostrophecms/svg-sprite': {},
+    '@apostrophecms/typography': {},
     '@apostrophecms/anchors': {},
     '@apostrophecms/favicon': {},
     '@apostrophecms/notification': {},
+    '@apostrophecms/login-totp': {},
+    '@apostrophecms/smilies': {},
+    '@apostrophecms/characterCount': {},
     '@apostrophecms/i18n-static': {
       options: {
         excludeNamespaces: [ 'aposEvent', 'aposForm' ]
@@ -58,6 +52,12 @@ require('apostrophe')({
     },
     // `asset` supports the project's webpack build for client-side assets.
     asset: {},
+    article: {},
+    // Tease an article on any page
+    'article-widget': {},
+    // Paginated index of articles, and with pages for individual articles
+    'article-page': {},
+    topic: {},
     // The project's first custom page type.
     'default-page': {},
     'columns-widget': {},

@@ -84,6 +84,13 @@ main {
   padding-top: 3rem;
 }
 
+@media (max-width: 768px) {
+  main {
+    padding-top: 1.5rem;
+  }
+}
+
+
 .card {
   border: none;
   border-radius: 10px;

@@ -13,12 +13,19 @@ html {
 	box-sizing: inherit;
 }
 
+#feedback {
+
+}
+
+.apos-admin-bar {
+
+}
 
 #preloader {
     i {
         position: absolute;
-        top: 75%;
-        left: 75%;
+        top: 50%;
+        left: 50%;
         width: 10vmin;
         height: 10vmin;
         border-radius: 50%;
@@ -176,7 +183,7 @@ textarea {
     }
     @media screen and (max-width: 410px) {
         .gradient-bg {
-            height: 41vh;
+            height: 45vh;
         }
     }
 }
@@ -506,7 +513,7 @@ p {
 }
 @media screen and (max-width: 410px) {
     .gradient-bg {
-        height: 41vh;
+        height: 45vh;
     }
 }
 

@@ -11,11 +11,6 @@
             </div>
             {% if not apos.area.isEmpty(data.widget, 'description') %}
             <p class="description-content">{% area data.widget, 'description' %}</p>
-            <div class="header__descr creative__text--animation-4">
-                {% for hashtag in data.widget.hashtags %}
-                <a href="{{ hashtag._hashtagLink[0].slug }}" style="--i: {{ loop.index0 }};" data-text="{{ hashtag.hashtag }}">{{ hashtag.hashtag }}</a>
-                {% endfor %}
-            </div>
             {% else %}
             <p class="placeholder">No description available</p>
             {% endif %}

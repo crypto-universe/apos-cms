@@ -18,7 +18,8 @@ module.exports = {
                                 'link',
                                 '|',
                                 'bulletList',
-                                'orderedList'
+                                'orderedList',
+                                'characterCount'
                             ],
                             styles: [
                                 {
