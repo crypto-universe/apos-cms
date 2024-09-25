@@ -2,7 +2,7 @@
 
 .accordion {
   &__item {
-    border-top: 1px solid $primary;
+    border-top: 1px solid black;
 
     &:first-of-type {
       border-top: none;
@@ -21,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    color: $primary;
+    color: black;
     text-align: left;
     cursor: pointer;
     -webkit-user-select: none;

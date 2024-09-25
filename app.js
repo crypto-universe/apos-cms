@@ -1,8 +1,13 @@
 require('apostrophe')({
-  shortName: 't-a',
-  baseUrl: 'https://new.agenc.io',
+  shortName: 'ultraauto',
+  baseUrl: 'https://ultraauto39.ru',
   bundles: [ '@apostrophecms/rich-text-example-extensions'],
   modules: {
+    '@apostrophecms/express': {
+      options: {
+        port: 5000
+      }
+    },
     // Apostrophe module configuration
     // *******************************
     //

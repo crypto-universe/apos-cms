@@ -1,3 +1,6 @@
+@import './functions';
+@import './variables';
+
 :root {
   --white:  #edf2f4;
   --black:  #2b2d42;
@@ -53,6 +56,176 @@
     background-position: -100% center;
   }
 }
+
+
+// ----------------------------------------
+// -- header
+// ----------------------------------------
+$header-layout:          spaceship !default;
+$spaceship-ledge-height: 24px      !default;
+
+// scheme
+$header-scheme-based-on: light !default;
+$header-scheme: () !default;
+$header-scheme: map-merge-all(get-scheme($header-scheme-based-on), (
+        shadow: 0 1px 3px rgba(#000, .09),
+), $header-scheme);
+
+// ----------------------------------------
+// -- .topbar--spaceship-start
+// ----------------------------------------
+$topbar-spaceship-start-scheme-based-on: theme !default;
+$topbar-spaceship-start-scheme: () !default;
+$topbar-spaceship-start-scheme: map-merge-all(get-scheme($topbar-spaceship-start-scheme-based-on), $topbar-spaceship-start-scheme);
+
+// ----------------------------------------
+// -- .topbar--spaceship-end
+// ----------------------------------------
+$topbar-spaceship-end-scheme-based-on: dark !default;
+$topbar-spaceship-end-scheme: () !default;
+$topbar-spaceship-end-scheme: map-merge-all(get-scheme($topbar-spaceship-end-scheme-based-on), $topbar-spaceship-end-scheme);
+
+// ----------------------------------------
+// -- .topbar--classic
+// ----------------------------------------
+$topbar-classic-scheme-based-on: light !default;
+$topbar-classic-scheme: () !default;
+$topbar-classic-scheme: map-merge-all(get-scheme($topbar-classic-scheme-based-on), $topbar-classic-scheme);
+
+// ----------------------------------------
+// -- .header__navbar
+// ----------------------------------------
+$navbar-stretch: false !default;
+$navbar-scheme-based-on: $header-scheme-based-on !default;
+$navbar-scheme: () !default;
+$navbar-scheme: map-merge-all(get-scheme($navbar-scheme-based-on), (
+        shadow: 0 1px 3px rgba(#000, .09),
+), $navbar-scheme);
+
+// ----------------------------------------
+// -- .indicator__counter
+// ----------------------------------------
+$indicator-counter-scheme-based-on: theme !default;
+$indicator-counter-scheme: () !default;
+$indicator-counter-scheme: map_merge(get-scheme($indicator-counter-scheme-based-on), $indicator-counter-scheme);
+
+// ----------------------------------------
+// -- .menu
+// ----------------------------------------
+$menu-scheme-based-on: light !default;
+$menu-scheme: () !default;
+$menu-scheme: map-merge-all(get-scheme($menu-scheme-based-on), (
+        shadow: 0 2px 20px rgba(#000, .2),
+), $menu-scheme);
+
+// small
+$menu-small-scheme-based-on: $menu-scheme !default;
+$menu-small-scheme: () !default;
+$menu-small-scheme: map-merge-all(get-scheme($menu-small-scheme-based-on), (
+        shadow: (0 1px 15px rgba(#000, .1), 0 1px 3px rgba(#000, .1)),
+), $menu-small-scheme);
+
+// ----------------------------------------
+// -- .departments__button
+// ----------------------------------------
+$departments-button-scheme-based-on: () !default;
+$departments-button-scheme-based-on: map-merge-deep((
+        normal: light,
+        hover: theme,
+), $departments-button-scheme-based-on);
+$departments-button-scheme: () !default;
+$departments-button-scheme: map-merge-deep((
+        normal: get-scheme(map_get($departments-button-scheme-based-on, normal)),
+        hover: get-scheme(map_get($departments-button-scheme-based-on, hover)),
+), $departments-button-scheme);
+
+// ----------------------------------------
+// -- .departments__menu
+// ----------------------------------------
+$departments-menu-scheme-based-on: $menu-scheme !default;
+$departments-menu-scheme: () !default;
+$departments-menu-scheme: map_merge(get-scheme($departments-menu-scheme-based-on), $departments-menu-scheme);
+
+// ----------------------------------------
+// -- .logo
+// ----------------------------------------
+$logo-scheme: () !default;
+$logo-scheme: map_merge((
+        primary:   map_get($theme-scheme, main),
+        secondary: #404040,
+), $logo-scheme);
+
+// ----------------------------------------
+// -- .search--layout--spaceship
+// ----------------------------------------
+$search-spaceship-divider-color:     map_get($header-scheme, divider)                   !default;
+$search-spaceship-top-shadow:        0 -1px 4px rgba(#000, .12), 0 -1px rgba(#000, .02) !default;
+$search-spaceship-top-shadow-radius: #{120px} / #{10px}                                 !default;
+// input
+$search-spaceship-input-scheme: () !default;
+$search-spaceship-input-scheme: map_merge((
+  // normal
+        normal-bg-color:          rgba(#f0f0f0, 0),
+        normal-font-color:        #262626,
+        normal-placeholder-color: #999,
+  // hover
+        hover-bg-color:           #f0f0f0,
+  // focus
+        focus-bg-color:           #f0f0f0,
+), $search-spaceship-input-scheme);
+// button
+$search-spaceship-button-scheme: () !default;
+$search-spaceship-button-scheme: map_merge((
+  // normal
+        normal-bg-color:   transparent,
+        normal-font-color: rgba(#000, .3),
+  // hover
+        hover-bg-color:    #f0f0f0,
+  // active
+        active-bg-color:   #e5e5e5,
+), $search-spaceship-button-scheme);
+
+// ----------------------------------------
+// -- .search--layout--classic
+// ----------------------------------------
+// input
+$search-classic-input-scheme: () !default;
+$search-classic-input-scheme: map-merge-deep((
+  // normal
+        normal-bg-color:          #ededed,
+        normal-border-color:      #ededed,
+        normal-font-color:        #262626,
+        normal-placeholder-color: #6c757d,
+        normal-icon-scheme: (
+                normal-font-color: #b2b2b2,
+                hover-font-color:  #404040,
+        ),
+  // hover
+        hover-border-color:       #e0e0e0,
+  // focus
+        focus-bg-color:           #fff,
+        focus-border-color:       #e5e5e5,
+), $search-classic-input-scheme);
+
+// button
+$search-classic-button-scheme: () !default;
+$search-classic-button-scheme: map_merge((
+  // normal
+        normal-bg-color:    map_get($accent-scheme, main),
+        normal-font-color:  #262626,
+        normal-icon-color:  rgba(#000, .75),
+        normal-arrow-color: rgba(#000, .35),
+  // hover
+        hover-bg-color:     #ffd226,
+  // active
+        active-bg-color:    #ffca16,
+), $search-classic-button-scheme);
+
+// ----------------------------------------
+// -- .dropcart
+// ----------------------------------------
+$dropcart-quantity-scheme: $theme-scheme                             !default;
+$dropcart-price-scheme:    map_merge($light-scheme, (main: #ebebeb)) !default;
 
 
 

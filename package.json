@@ -53,6 +53,7 @@
     "@apostrophecms/vue-material-design-icons": "^1.0.0",
     "aos": "^2.3.4",
     "apostrophe": "^4.3.2",
+    "bootstrap": "^5.3.3",
     "photoswipe": "^5.3.7",
     "swiper": "^9.2.3"
   },
