@@ -2,6 +2,10 @@ export default () => {
   // Your own project level JS may go here
   console.log('Нужна работа? Пиши нам 💎');
   document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("dark-mode-toggle");
+    toggle.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+    });
     function throttle(func, limit) {
       let lastCall = 0;
       return function() {
@@ -17,9 +21,6 @@ export default () => {
     const sidebar = document.querySelector(".sidebar");
     const readingProgressContainer = document.querySelector(".reading-progress-container");
 
-    sidebarToggle.addEventListener("click", function () {
-      document.body.classList.toggle("sidebar-visible");
-    }, { passive: true });
 
     const headers = document.querySelectorAll(".post-content :is(h1, h2, h3)");
 
@@ -110,5 +111,4 @@ export default () => {
       }
     }, { passive: true });
   });
-  console.clear()
 };

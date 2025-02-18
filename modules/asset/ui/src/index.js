@@ -5,13 +5,17 @@ export default () => {
 
   window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
-    const minTime = 1; // 1 секунда
-    const maxTime = 1.5; // 1.5 секунды
-    const loadTime = Math.random() * (maxTime - minTime) + minTime; // случайное время от 1 до 1.5 секунды
 
-    setTimeout(() => {
-      preloader.classList.add('hidden');
-    }, loadTime);
+    if (preloader) {
+      const minTime = 1; // 1 second
+      const maxTime = 1.5; // 1.5 seconds
+      const loadTime = Math.random() * (maxTime - minTime) + minTime; // Random time between 1 and 1.5 seconds
+
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+      }, loadTime);
+    } else {
+    }
   });
 
 
@@ -19,18 +23,20 @@ export default () => {
 
     const sidebarToggle = document.querySelector(".sidebar-toggle");
     const sidebar = document.querySelector(".sidebar");
+    const mainElement = document.querySelector(".main"); // Targeting the main element
+
 
     sidebarToggle.addEventListener("click", function () {
-      document.body.classList.toggle("sidebar-visible");
+      mainElement.classList.toggle("sidebar-visible"); // Toggle class on the main element
     }, { passive: true });
-
 
     document.addEventListener("click", function (event) {
       if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
-        document.body.classList.remove("sidebar-visible");
+        mainElement.classList.remove("sidebar-visible"); // Remove class from the main element
       }
     }, { passive: true });
   });
+
 
   function navFunc() {
     var context = document.querySelector("#headernav");
@@ -130,7 +136,6 @@ export default () => {
   navFunc();
 
 
-  console.clear()
 
 
 
