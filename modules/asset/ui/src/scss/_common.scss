@@ -152,7 +152,7 @@ textarea {
     min-height: 300px;
     width: 100%;
     height: 100%;
-   -webkit-box-shadow: 0px 0px 5px 0px #151616;
+   -webkit-box-shadow: 0 0px 5px 0px #151616;
     box-shadow: 0px 0px 5px 0px #151616;
     position: relative;
     border-radius: 1rem;
@@ -809,7 +809,7 @@ h1 {
     );
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: trannparent;
+    -webkit-text-fill-color: transparent;
     background-size: 500% auto;
     border-right: 2px solid var(--gradient-color-1);
     color: transparent;
@@ -3326,7 +3326,7 @@ nav .menu-text a:hover {
     font-weight: normal;
     padding: 1em;
     position: absolute;
-    transition: opacity 2 ease-out;
+    transition: opacity 2s ease-out;
     transform: rotateX(-25deg) scale(1);
     transform-origin: 50% 7em 0em;
     opacity: 0;
@@ -3573,7 +3573,6 @@ body.dark-mode {
     align-items: flex-start;
     margin: auto;
 }
-
 
 .intro
 {
