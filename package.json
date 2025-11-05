@@ -40,6 +40,7 @@
   "author": "Apostrophe Technologies, Inc.",
   "license": "MIT",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.68.0",
     "@apostrophecms/anchors": "^1.0.0",
     "@apostrophecms/favicon": "^1.0.0",
     "@apostrophecms/i18n-static": "^1.0.0",

@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 module.exports = {
   extend: '@apostrophecms/module',
 
@@ -8,7 +10,20 @@ module.exports = {
   handlers(self) {
     return {
       'apostrophe:modulesReady': {
-        addRoutes() {
+        async addRoutes() {
+          // Создаем индекс для email поля при старте приложения
+          try {
+            await self.apos.db.collection('newsletterSubscribers').createIndex(
+              { email: 1 },
+              { unique: true }
+            );
+            console.log('✅ Newsletter module: MongoDB index created');
+          } catch (error) {
+            if (error.code !== 85) { // Игнорируем ошибку если индекс уже существует
+              console.error('Newsletter index creation error:', error);
+            }
+          }
+
           // API endpoint для подписки на рассылку
           self.apos.app.post('/api/newsletter/subscribe', async (req, res) => {
             try {
@@ -38,11 +53,16 @@ module.exports = {
               await self.saveSubscriber(email);
 
               // Отправка приветственного письма (опционально)
-              // await self.sendWelcomeEmail(email);
+              try {
+                await self.sendWelcomeEmail(email);
+              } catch (emailError) {
+                console.error('Welcome email error:', emailError);
+                // Не прерываем процесс если письмо не отправилось
+              }
 
               return res.send(`
                 <div class="subscription-message success">
-                  <span>✅</span> Спасибо за подписку! Мы отправили письмо на ${email}
+                  <span>✅</span> Спасибо за подписку! Мы отправим письмо на ${email}
                 </div>
               `);
 
@@ -64,7 +84,35 @@ module.exports = {
               // Проверка токена безопасности
               const isValid = await self.validateUnsubscribeToken(email, token);
               if (!isValid) {
-                return res.status(400).send('Invalid unsubscribe link');
+                return res.status(400).send(`
+                  <!DOCTYPE html>
+                  <html>
+                  <head>
+                    <title>Ошибка отписки</title>
+                    <style>
+                      body {
+                        font-family: Arial, sans-serif;
+                        max-width: 600px;
+                        margin: 50px auto;
+                        padding: 20px;
+                        text-align: center;
+                      }
+                      .message {
+                        background: #fee;
+                        padding: 30px;
+                        border-radius: 8px;
+                        border: 2px solid #fcc;
+                      }
+                    </style>
+                  </head>
+                  <body>
+                    <div class="message">
+                      <h1>❌ Неверная ссылка</h1>
+                      <p>Ссылка для отписки недействительна или устарела.</p>
+                    </div>
+                  </body>
+                  </html>
+                `);
               }
 
               await self.removeSubscriber(email);
@@ -87,12 +135,21 @@ module.exports = {
                       padding: 30px;
                       border-radius: 8px;
                     }
+                    .success {
+                      color: #0c0;
+                      font-size: 48px;
+                      margin-bottom: 20px;
+                    }
                   </style>
                 </head>
                 <body>
                   <div class="message">
+                    <div class="success">✅</div>
                     <h1>Вы успешно отписались</h1>
                     <p>Адрес ${email} был удален из списка рассылки.</p>
+                    <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                      Нам жаль, что вы уходите. Мы всегда рады видеть вас снова!
+                    </p>
                   </div>
                 </body>
                 </html>
@@ -100,7 +157,60 @@ module.exports = {
 
             } catch (error) {
               console.error('Unsubscribe error:', error);
-              return res.status(500).send('Error processing unsubscribe request');
+              return res.status(500).send(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                  <title>Ошибка</title>
+                  <style>
+                    body {
+                      font-family: Arial, sans-serif;
+                      max-width: 600px;
+                      margin: 50px auto;
+                      padding: 20px;
+                      text-align: center;
+                    }
+                    .message {
+                      background: #fee;
+                      padding: 30px;
+                      border-radius: 8px;
+                    }
+                  </style>
+                </head>
+                <body>
+                  <div class="message">
+                    <h1>Произошла ошибка</h1>
+                    <p>Пожалуйста, попробуйте позже или свяжитесь с нами.</p>
+                  </div>
+                </body>
+                </html>
+              `);
+            }
+          });
+
+          // API endpoint для получения статистики (только для админов)
+          self.apos.app.get('/api/newsletter/stats', async (req, res) => {
+            try {
+              // Проверка авторизации
+              if (!req.user || !req.user.role === 'admin') {
+                return res.status(401).json({
+                  error: 'Unauthorized'
+                });
+              }
+
+              const stats = await self.getStats();
+
+              return res.json({
+                success: true,
+                stats: stats
+              });
+
+            } catch (error) {
+              console.error('Newsletter stats error:', error);
+              return res.status(500).json({
+                error: 'Failed to get stats',
+                message: error.message
+              });
             }
           });
         }
@@ -112,86 +222,298 @@ module.exports = {
     return {
       // Найти подписчика по email
       async findSubscriber(email) {
-        // TODO: Реализовать поиск в базе данных
-        // Используйте MongoDB для хранения подписчиков
-        /*
-        return await self.apos.db.collection('newsletterSubscribers').findOne({
-          email: email.toLowerCase()
-        });
-        */
-        return null; // Демо: всегда возвращаем null
+        try {
+          return await self.apos.db.collection('newsletterSubscribers').findOne({
+            email: email.toLowerCase()
+          });
+        } catch (error) {
+          console.error('Find subscriber error:', error);
+          throw error;
+        }
       },
 
       // Сохранить подписчика
       async saveSubscriber(email) {
-        // TODO: Реализовать сохранение в базе данных
-        /*
-        await self.apos.db.collection('newsletterSubscribers').insertOne({
-          email: email.toLowerCase(),
-          subscribedAt: new Date(),
-          status: 'active',
-          source: 'website-footer'
-        });
-        */
+        try {
+          const subscriber = {
+            email: email.toLowerCase(),
+            subscribedAt: new Date(),
+            status: 'active',
+            source: 'website-footer',
+            ipAddress: null, // Можно добавить req.ip если нужно
+            userAgent: null, // Можно добавить req.headers['user-agent']
+            confirmedAt: null, // Для double opt-in если нужно
+            metadata: {}
+          };
 
-        // Для демо просто логируем
-        console.log(`New subscriber: ${email}`);
+          await self.apos.db.collection('newsletterSubscribers').insertOne(subscriber);
+
+          console.log(`✅ New newsletter subscriber: ${email}`);
+
+          return subscriber;
+
+        } catch (error) {
+          if (error.code === 11000) {
+            // Duplicate key error - подписчик уже существует
+            console.log(`ℹ️ Subscriber already exists: ${email}`);
+            return null;
+          }
+
+          console.error('Save subscriber error:', error);
+          throw error;
+        }
       },
 
       // Удалить подписчика
       async removeSubscriber(email) {
-        // TODO: Реализовать удаление из базы данных
-        /*
-        await self.apos.db.collection('newsletterSubscribers').deleteOne({
-          email: email.toLowerCase()
-        });
-        */
+        try {
+          const result = await self.apos.db.collection('newsletterSubscribers').deleteOne({
+            email: email.toLowerCase()
+          });
 
-        console.log(`Subscriber removed: ${email}`);
+          if (result.deletedCount > 0) {
+            console.log(`✅ Subscriber removed: ${email}`);
+          } else {
+            console.log(`ℹ️ Subscriber not found: ${email}`);
+          }
+
+          return result;
+
+        } catch (error) {
+          console.error('Remove subscriber error:', error);
+          throw error;
+        }
       },
 
       // Проверить токен отписки
       async validateUnsubscribeToken(email, token) {
-        // TODO: Реализовать проверку токена
-        // Токен должен быть сгенерирован при отправке письма
-        /*
-        const crypto = require('crypto');
-        const expectedToken = crypto
+        try {
+          if (!email || !token) {
+            return false;
+          }
+
+          const secret = process.env.UNSUBSCRIBE_SECRET || 'default-secret-change-in-production';
+
+          const expectedToken = crypto
+            .createHash('sha256')
+            .update(email.toLowerCase() + secret)
+            .digest('hex');
+
+          return token === expectedToken;
+
+        } catch (error) {
+          console.error('Validate token error:', error);
+          return false;
+        }
+      },
+
+      // Сгенерировать токен отписки
+      generateUnsubscribeToken(email) {
+        const secret = process.env.UNSUBSCRIBE_SECRET || 'default-secret-change-in-production';
+
+        return crypto
           .createHash('sha256')
-          .update(email + process.env.UNSUBSCRIBE_SECRET)
+          .update(email.toLowerCase() + secret)
           .digest('hex');
-
-        return token === expectedToken;
-        */
-
-        return true; // Демо: всегда валидный
       },
 
       // Отправить приветственное письмо
       async sendWelcomeEmail(email) {
-        // TODO: Интеграция с email сервисом (SendGrid, Mailgun и т.д.)
-        /*
-        const nodemailer = require('nodemailer');
+        // Проверяем наличие SMTP конфигурации
+        const smtpConfigured = process.env.SMTP_HOST && process.env.SMTP_USER;
 
-        const transporter = nodemailer.createTransport({
-          // конфигурация SMTP
-        });
+        if (!smtpConfigured) {
+          console.log(`⚠️ SMTP не настроен. Email не отправлен: ${email}`);
+          console.log('ℹ️ Настройте SMTP_HOST, SMTP_USER, SMTP_PASS в .env для отправки писем');
+          return;
+        }
 
-        await transporter.sendMail({
-          from: 'noreply@agenc.io',
-          to: email,
-          subject: 'Добро пожаловать в нашу рассылку!',
-          html: `
-            <h1>Спасибо за подписку!</h1>
-            <p>Вы будете получать наши обновления и новости.</p>
-            <p><a href="${self.apos.baseUrl}/api/newsletter/unsubscribe?email=${email}&token=${token}">
-              Отписаться от рассылки
-            </a></p>
-          `
-        });
-        */
+        try {
+          const nodemailer = require('nodemailer');
 
-        console.log(`Welcome email sent to: ${email}`);
+          // Создаем транспорт для отправки
+          const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT || 587,
+            secure: process.env.SMTP_SECURE === 'true', // true для 465, false для других портов
+            auth: {
+              user: process.env.SMTP_USER,
+              pass: process.env.SMTP_PASS
+            }
+          });
+
+          // Генерируем токен для отписки
+          const unsubscribeToken = self.generateUnsubscribeToken(email);
+          const unsubscribeUrl = `${self.apos.baseUrl}/api/newsletter/unsubscribe?email=${encodeURIComponent(email)}&token=${unsubscribeToken}`;
+
+          // Отправляем письмо
+          const info = await transporter.sendMail({
+            from: process.env.SMTP_FROM || '"Техно-Агенсио" <noreply@agenc.io>',
+            to: email,
+            subject: 'Добро пожаловать в нашу рассылку! 🎉',
+            html: `
+              <!DOCTYPE html>
+              <html>
+              <head>
+                <meta charset="utf-8">
+                <style>
+                  body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                  }
+                  .header {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 30px;
+                    text-align: center;
+                    border-radius: 8px 8px 0 0;
+                  }
+                  .content {
+                    background: #f9f9f9;
+                    padding: 30px;
+                    border-radius: 0 0 8px 8px;
+                  }
+                  .button {
+                    display: inline-block;
+                    padding: 12px 24px;
+                    background: #667eea;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 6px;
+                    margin: 20px 0;
+                  }
+                  .footer {
+                    margin-top: 30px;
+                    padding-top: 20px;
+                    border-top: 1px solid #ddd;
+                    font-size: 12px;
+                    color: #666;
+                    text-align: center;
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="header">
+                  <h1>🎉 Добро пожаловать!</h1>
+                </div>
+                <div class="content">
+                  <h2>Спасибо за подписку, ${email}!</h2>
+
+                  <p>Мы рады приветствовать вас в нашей рассылке. Теперь вы будете получать:</p>
+
+                  <ul>
+                    <li>✨ Последние новости и обновления</li>
+                    <li>🚀 Эксклюзивные предложения</li>
+                    <li>💡 Полезные советы и материалы</li>
+                    <li>🎁 Специальные бонусы для подписчиков</li>
+                  </ul>
+
+                  <p>Следите за обновлениями в вашей почте!</p>
+
+                  <a href="${self.apos.baseUrl}" class="button">Посетить наш сайт</a>
+
+                  <div class="footer">
+                    <p>Вы получили это письмо, потому что подписались на рассылку на ${self.apos.baseUrl}</p>
+                    <p>
+                      <a href="${unsubscribeUrl}" style="color: #666;">Отписаться от рассылки</a>
+                    </p>
+                    <p>© 2024 Техно-Агенсио. Все права защищены.</p>
+                  </div>
+                </div>
+              </body>
+              </html>
+            `
+          });
+
+          console.log(`✅ Welcome email sent to ${email}. Message ID: ${info.messageId}`);
+
+          return info;
+
+        } catch (error) {
+          console.error('Send email error:', error);
+          // Не бросаем ошибку, чтобы не прерывать процесс подписки
+          console.error(`❌ Failed to send welcome email to ${email}`);
+        }
+      },
+
+      // Получить статистику подписчиков
+      async getStats() {
+        try {
+          const collection = self.apos.db.collection('newsletterSubscribers');
+
+          const total = await collection.countDocuments({ status: 'active' });
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          const todayCount = await collection.countDocuments({
+            status: 'active',
+            subscribedAt: { $gte: today }
+          });
+
+          const last7Days = new Date(today);
+          last7Days.setDate(last7Days.getDate() - 7);
+
+          const weekCount = await collection.countDocuments({
+            status: 'active',
+            subscribedAt: { $gte: last7Days }
+          });
+
+          const last30Days = new Date(today);
+          last30Days.setDate(last30Days.getDate() - 30);
+
+          const monthCount = await collection.countDocuments({
+            status: 'active',
+            subscribedAt: { $gte: last30Days }
+          });
+
+          // Статистика по источникам
+          const sourceStats = await collection.aggregate([
+            { $match: { status: 'active' } },
+            { $group: { _id: '$source', count: { $sum: 1 } } },
+            { $sort: { count: -1 } }
+          ]).toArray();
+
+          return {
+            total: total,
+            today: todayCount,
+            last7Days: weekCount,
+            last30Days: monthCount,
+            bySources: sourceStats.map(s => ({
+              source: s._id,
+              count: s.count
+            }))
+          };
+
+        } catch (error) {
+          console.error('Get stats error:', error);
+          throw error;
+        }
+      },
+
+      // Экспорт подписчиков в CSV (для админов)
+      async exportSubscribers() {
+        try {
+          const subscribers = await self.apos.db.collection('newsletterSubscribers')
+            .find({ status: 'active' })
+            .sort({ subscribedAt: -1 })
+            .toArray();
+
+          // Простой CSV формат
+          let csv = 'Email,Subscribed At,Source\n';
+          subscribers.forEach(sub => {
+            csv += `${sub.email},${sub.subscribedAt.toISOString()},${sub.source}\n`;
+          });
+
+          return csv;
+
+        } catch (error) {
+          console.error('Export subscribers error:', error);
+          throw error;
+        }
       }
     };
   }
