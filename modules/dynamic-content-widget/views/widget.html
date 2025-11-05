@@ -1,0 +1,50 @@
+{% set widgetId = 'dynamic-' + apos.util.generateId() %}
+{% set triggerAttr = '' %}
+
+{% if data.widget.trigger == 'load' %}
+  {% set triggerAttr = 'load' %}
+{% elif data.widget.trigger == 'click' %}
+  {% set triggerAttr = 'click' %}
+{% elif data.widget.trigger == 'revealed' %}
+  {% set triggerAttr = 'revealed' %}
+{% elif data.widget.trigger == 'every' %}
+  {% set triggerAttr = 'every ' + data.widget.pollInterval + 's' %}
+{% endif %}
+
+<div class="dynamic-content-widget {{ data.widget.className or '' }}" data-widget-id="{{ widgetId }}">
+  {% if data.widget.trigger == 'click' %}
+    <button
+      class="dynamic-content-button"
+      hx-{{ data.widget.method or 'get' }}="{{ data.widget.endpoint }}"
+      hx-target="#{{ widgetId }}-content"
+      hx-swap="{{ data.widget.swapStyle or 'innerHTML' }}"
+      {% if data.widget.showLoadingIndicator %}hx-indicator="#{{ widgetId }}-loading"{% endif %}>
+      {{ data.widget.buttonText or 'Загрузить контент' }}
+    </button>
+
+    {% if data.widget.showLoadingIndicator %}
+      <div id="{{ widgetId }}-loading" class="htmx-indicator loading-indicator">
+        <span class="spinner-small"></span>
+        {{ data.widget.loadingText or 'Загрузка...' }}
+      </div>
+    {% endif %}
+
+    <div id="{{ widgetId }}-content" class="dynamic-content-container"></div>
+  {% else %}
+    <div
+      id="{{ widgetId }}-content"
+      class="dynamic-content-container"
+      hx-{{ data.widget.method or 'get' }}="{{ data.widget.endpoint }}"
+      hx-trigger="{{ triggerAttr }}"
+      hx-swap="{{ data.widget.swapStyle or 'innerHTML' }}"
+      {% if data.widget.showLoadingIndicator %}hx-indicator="#{{ widgetId }}-loading"{% endif %}>
+
+      {% if data.widget.showLoadingIndicator %}
+        <div id="{{ widgetId }}-loading" class="htmx-indicator loading-indicator">
+          <span class="spinner-small"></span>
+          {{ data.widget.loadingText or 'Загрузка...' }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

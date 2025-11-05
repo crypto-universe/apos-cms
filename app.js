@@ -52,6 +52,10 @@ require('apostrophe')({
     },
     // `asset` supports the project's webpack build for client-side assets.
     asset: {},
+    // AI Assistant module for content generation with Claude
+    'ai-assistant': {},
+    // Newsletter subscription module with htmx integration
+    newsletter: {},
     article: {},
     // Tease an article on any page
     'article-widget': {},
@@ -71,6 +75,7 @@ require('apostrophe')({
     'faq-widget': {},
     'offers-widget': {},
     'html-widget': {},
+    'dynamic-content-widget': {},
     '@apostrophecms/admin-bar': {
       options: {
         addGroups: [

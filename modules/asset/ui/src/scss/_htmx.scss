@@ -1,0 +1,391 @@
+// HTMX Styles and Enhancements
+
+// Error Toast
+.htmx-error-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ef4444;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 10000;
+  max-width: 350px;
+  font-size: 14px;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Loading Indicators
+.htmx-indicator {
+  display: none;
+
+  &.htmx-request {
+    display: inline-block;
+  }
+}
+
+.spinner-small {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+// Subscription Form Enhancements
+.subscription-button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subscription-message {
+  margin-top: 10px;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideInUp 0.3s ease-out;
+
+  span {
+    font-size: 18px;
+  }
+
+  &.success {
+    background: #10b981;
+    color: white;
+  }
+
+  &.error {
+    background: #ef4444;
+    color: white;
+  }
+
+  &.info {
+    background: #3b82f6;
+    color: white;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// HTMX Swap Transitions
+.htmx-swapping {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.htmx-settling {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+// Loading Overlay for Full Page Requests
+.htmx-request.htmx-full-page-loading {
+  .loading-overlay {
+    display: flex;
+  }
+}
+
+.loading-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  .spinner-large {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(102, 126, 234, 0.2);
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Dynamic Content Loading States
+[hx-get],
+[hx-post],
+[hx-put],
+[hx-patch],
+[hx-delete] {
+  position: relative;
+
+  &.htmx-request::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+}
+
+// Smooth Content Transitions
+.htmx-fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.htmx-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Enhanced Button States for HTMX
+button[hx-get],
+button[hx-post],
+button[hx-put],
+button[hx-patch],
+button[hx-delete],
+input[type="submit"][hx-get],
+input[type="submit"][hx-post] {
+  &.htmx-request {
+    opacity: 0.7;
+    cursor: wait;
+    pointer-events: none;
+  }
+}
+
+// Success/Error Flash Messages
+.htmx-flash-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 300px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideInRight 0.3s ease-out;
+  z-index: 10000;
+
+  &.success {
+    background: #10b981;
+    color: white;
+  }
+
+  &.error {
+    background: #ef4444;
+    color: white;
+  }
+
+  &.info {
+    background: #3b82f6;
+    color: white;
+  }
+
+  &.warning {
+    background: #f59e0b;
+    color: white;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Polling Indicators
+[hx-trigger*="every"] {
+  position: relative;
+
+  &::after {
+    content: '🔄';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+    opacity: 0.3;
+  }
+}
+
+// Infinite Scroll Loading
+.infinite-scroll-indicator {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(102, 126, 234, 0.2);
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto;
+  }
+}
+
+// Form Validation States with HTMX
+.form-field {
+  margin-bottom: 15px;
+
+  &.htmx-validating {
+    .validation-spinner {
+      display: inline-block;
+    }
+  }
+
+  .validation-spinner {
+    display: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 8px;
+  }
+
+  .validation-message {
+    margin-top: 5px;
+    font-size: 12px;
+
+    &.success {
+      color: #10b981;
+    }
+
+    &.error {
+      color: #ef4444;
+    }
+  }
+}
+
+// Optimistic UI Updates
+.optimistic-update {
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.2s;
+
+  &.confirmed {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// Modal/Drawer with HTMX
+.htmx-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.2s ease-out;
+
+  .modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: scaleIn 0.2s ease-out;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Progress Bar for Long Operations
+.htmx-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #667eea;
+  transform-origin: left;
+  animation: progressBar 2s ease-in-out infinite;
+  z-index: 10001;
+}
+
+@keyframes progressBar {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(0.5);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}

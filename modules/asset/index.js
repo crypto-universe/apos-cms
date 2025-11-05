@@ -7,5 +7,9 @@ module.exports = {
         }
       }
     };
+  },
+  options: {
+    // Add htmx to the build
+    alias: 'asset'
   }
 };

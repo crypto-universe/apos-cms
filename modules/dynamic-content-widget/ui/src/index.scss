@@ -1,0 +1,78 @@
+// Dynamic Content Widget Styles
+@import "../../../asset/ui/src/scss/variables";
+
+.dynamic-content-widget {
+  margin: 20px 0;
+
+  .dynamic-content-button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &.htmx-request {
+      opacity: 0.7;
+      cursor: wait;
+    }
+  }
+
+  .loading-indicator {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    color: #666;
+    font-size: 14px;
+
+    &.htmx-request {
+      display: flex;
+    }
+
+    .spinner-small {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(102, 126, 234, 0.2);
+      border-top-color: #667eea;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+  }
+
+  .dynamic-content-container {
+    margin-top: 15px;
+
+    &.htmx-swapping {
+      opacity: 0;
+      transition: opacity 200ms ease-out;
+    }
+
+    &.htmx-settling {
+      opacity: 1;
+      transition: opacity 200ms ease-in;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

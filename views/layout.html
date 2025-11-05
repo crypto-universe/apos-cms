@@ -98,8 +98,20 @@
                 </ul>
                 <ul class="box input-box">
                     <li class="link_name">Подпишитесь на обновления</li>
-                    <li><input type="text" placeholder="Введите свою почту"></li>
-                    <li><input type="button" value="Подписка"></li>
+                    <li>
+                        <form
+                            hx-post="/api/newsletter/subscribe"
+                            hx-target="#subscription-result"
+                            hx-swap="innerHTML"
+                            hx-indicator="#subscribe-spinner">
+                            <input type="email" name="email" placeholder="Введите свою почту" required>
+                            <div class="subscription-button-wrapper">
+                                <input type="submit" value="Подписка">
+                                <span id="subscribe-spinner" class="htmx-indicator spinner-small"></span>
+                            </div>
+                        </form>
+                    </li>
+                    <li><div id="subscription-result"></div></li>
                 </ul>
             </div>
         </div>

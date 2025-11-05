@@ -1,6 +1,44 @@
+// Import htmx
+import htmx from 'htmx.org';
+
 export default () => {
   // Your own project level JS may go here
   console.log('Нужна работа? Пиши нам 💎');
+
+  // Initialize htmx
+  window.htmx = htmx;
+
+  // Configure htmx
+  htmx.config.defaultSwapStyle = 'innerHTML';
+  htmx.config.timeout = 10000; // 10 seconds timeout
+  htmx.config.scrollBehavior = 'smooth';
+
+  // Add global event listeners for htmx
+  document.body.addEventListener('htmx:beforeRequest', function(evt) {
+    console.log('HTMX Request starting:', evt.detail.path);
+  });
+
+  document.body.addEventListener('htmx:afterSwap', function(evt) {
+    console.log('HTMX Content swapped:', evt.detail.path);
+  });
+
+  document.body.addEventListener('htmx:responseError', function(evt) {
+    console.error('HTMX Request failed:', evt.detail);
+    // Show user-friendly error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'htmx-error-toast';
+    errorDiv.textContent = 'Произошла ошибка при загрузке данных. Попробуйте еще раз.';
+    document.body.appendChild(errorDiv);
+
+    setTimeout(() => {
+      errorDiv.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+      errorDiv.classList.remove('show');
+      setTimeout(() => errorDiv.remove(), 300);
+    }, 3000);
+  });
 
 
   window.addEventListener('load', function() {
