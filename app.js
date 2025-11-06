@@ -52,7 +52,9 @@ require('apostrophe')({
     },
     // `asset` supports the project's webpack build for client-side assets.
     asset: {},
-    // AI Assistant module for content generation with Claude
+    // AI Provider Manager - unified system for multiple AI providers
+    'ai-provider-manager': {},
+    // AI Assistant module for content generation with multiple AI providers
     'ai-assistant': {},
     // Newsletter subscription module with htmx integration
     newsletter: {},
