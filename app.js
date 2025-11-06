@@ -56,6 +56,8 @@ require('apostrophe')({
     'ai-assistant': {},
     // Newsletter subscription module with htmx integration
     newsletter: {},
+    // Schema.org structured data for SEO (rich snippets)
+    'schema-markup': {},
     article: {},
     // Tease an article on any page
     'article-widget': {},
