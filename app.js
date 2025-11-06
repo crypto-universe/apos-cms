@@ -75,6 +75,10 @@ require('apostrophe')({
     'advanced-permissions': {},
     // Automatic Translations - Google Translate, DeepL, AI
     'automatic-translations': {},
+    // Document Versions - full versioning system
+    'document-versions': {},
+    // Template Library - content templates
+    'template-library': {},
     article: {},
     // Tease an article on any page
     'article-widget': {},
