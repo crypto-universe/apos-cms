@@ -73,6 +73,8 @@ require('apostrophe')({
     // ========================================
     // Advanced Permissions - granular access control
     'advanced-permissions': {},
+    // Automatic Translations - Google Translate, DeepL, AI
+    'automatic-translations': {},
     article: {},
     // Tease an article on any page
     'article-widget': {},
