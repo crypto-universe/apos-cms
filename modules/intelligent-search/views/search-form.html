@@ -1,0 +1,57 @@
+{# Intelligent Search Form Component #}
+
+<div class="intelligent-search">
+  <form class="search-form" hx-post="/api/search/results" hx-target="#search-results" hx-swap="innerHTML">
+    <div class="search-form__container">
+      <div class="search-form__input-wrapper">
+        <label for="search-input" class="search-form__label">Поиск по сайту</label>
+
+        <div class="search-form__input-group">
+          <span class="search-form__icon">🔍</span>
+
+          <input type="text"
+                 id="search-input"
+                 name="query"
+                 class="search-form__input"
+                 placeholder="Введите поисковый запрос..."
+                 autocomplete="off"
+                 hx-post="/api/search/suggestions"
+                 hx-trigger="keyup changed delay:300ms"
+                 hx-target="#search-suggestions"
+                 hx-swap="innerHTML">
+
+          <button type="submit" class="search-form__submit">
+            Найти
+          </button>
+        </div>
+
+        {# Live suggestions dropdown #}
+        <div id="search-suggestions" class="search-suggestions"></div>
+      </div>
+
+      {# Search filters (optional) #}
+      <div class="search-form__filters">
+        <label class="search-form__filter">
+          <input type="checkbox" name="filter" value="articles" checked>
+          <span>Статьи</span>
+        </label>
+
+        <label class="search-form__filter">
+          <input type="checkbox" name="filter" value="pages">
+          <span>Страницы</span>
+        </label>
+      </div>
+    </div>
+  </form>
+
+  {# Search results container #}
+  <div id="search-results" class="search-results">
+    <div class="search-results__initial">
+      <div class="search-results__icon">🔍</div>
+      <p>Введите запрос для начала поиска</p>
+      <p class="search-results__hint">
+        Используйте умный поиск с AI подсказками для быстрого нахождения нужной информации
+      </p>
+    </div>
+  </div>
+</div>

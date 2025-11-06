@@ -58,6 +58,14 @@ require('apostrophe')({
     newsletter: {},
     // Schema.org structured data for SEO (rich snippets)
     'schema-markup': {},
+    // Enhanced Breadcrumbs with Schema.org support
+    'enhanced-breadcrumbs': {},
+    // AI-powered Related Content Widget
+    'related-content-widget': {},
+    // AI-powered FAQ Generator
+    'faq-generator': {},
+    // Intelligent Search with AI hints
+    'intelligent-search': {},
     article: {},
     // Tease an article on any page
     'article-widget': {},

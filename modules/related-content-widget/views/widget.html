@@ -1,0 +1,146 @@
+{# Related Content Widget Template #}
+
+{% set maxItems = data.widget.maxItems or 3 %}
+{% set displayStyle = data.widget.displayStyle or 'cards' %}
+{% set showExcerpt = data.widget.showExcerpt %}
+{% set showImages = data.widget.showImages %}
+{% set useAI = data.widget.useAI %}
+{% set manualSelection = data.widget.manualSelection %}
+
+{# Определяем какие статьи показывать #}
+{% set relatedArticles = [] %}
+
+{% if manualSelection and manualSelection.length > 0 %}
+  {# Используем ручной выбор если указан #}
+  {% set relatedArticles = manualSelection %}
+{% else %}
+  {# Используем динамическую загрузку через HTMX #}
+  {% set currentPage = data.page %}
+  {% set currentPiece = data.piece %}
+
+  {% if currentPiece %}
+    {# Если мы на странице статьи (piece) #}
+    <div class="related-content-widget related-content-widget--{{ displayStyle }}"
+         hx-post="/api/related-content/get"
+         hx-trigger="load"
+         hx-vals='{"articleId": "{{ currentPiece._id }}", "maxItems": {{ maxItems }}, "useAI": {{ useAI | string | lower }}, "displayStyle": "{{ displayStyle }}", "showExcerpt": {{ showExcerpt | string | lower }}, "showImages": {{ showImages | string | lower }}}'
+         hx-swap="innerHTML">
+
+      {# Loader пока загружаются статьи #}
+      <div class="related-content-widget__loader">
+        <div class="spinner"></div>
+        <p>Загружаем похожие статьи...</p>
+      </div>
+    </div>
+  {% elif currentPage and currentPage.type == 'article' %}
+    {# Если это страница-статья #}
+    <div class="related-content-widget related-content-widget--{{ displayStyle }}"
+         hx-post="/api/related-content/get"
+         hx-trigger="load"
+         hx-vals='{"articleId": "{{ currentPage._id }}", "maxItems": {{ maxItems }}, "useAI": {{ useAI | string | lower }}, "displayStyle": "{{ displayStyle }}", "showExcerpt": {{ showExcerpt | string | lower }}, "showImages": {{ showImages | string | lower }}}'
+         hx-swap="innerHTML">
+
+      {# Loader #}
+      <div class="related-content-widget__loader">
+        <div class="spinner"></div>
+        <p>Загружаем похожие статьи...</p>
+      </div>
+    </div>
+  {% else %}
+    {# Не на странице статьи - не показываем виджет #}
+    <div class="related-content-widget__empty">
+      <p style="color: #999; font-style: italic;">Этот виджет доступен только на страницах статей</p>
+    </div>
+  {% endif %}
+{% endif %}
+
+{# Если есть ручной выбор, рендерим статически #}
+{% if manualSelection and manualSelection.length > 0 %}
+  <div class="related-content-widget related-content-widget--{{ displayStyle }}">
+    <h2 class="related-content-widget__title">Похожие статьи</h2>
+
+    {% if displayStyle == 'cards' %}
+      <div class="related-content-widget__cards">
+        {% for article in manualSelection.slice(0, maxItems) %}
+          <article class="related-content-card">
+            {% if showImages and article.featuredImage and article.featuredImage.length > 0 %}
+              <div class="related-content-card__image">
+                <a href="{{ article._url }}">
+                  <img src="{{ apos.attachment.url(article.featuredImage[0], { size: 'one-third' }) }}"
+                       alt="{{ article.title }}"
+                       loading="lazy">
+                </a>
+              </div>
+            {% endif %}
+
+            <div class="related-content-card__content">
+              <h3 class="related-content-card__title">
+                <a href="{{ article._url }}">{{ article.title }}</a>
+              </h3>
+
+              {% if showExcerpt and article.description %}
+                <p class="related-content-card__excerpt">{{ article.description }}</p>
+              {% endif %}
+
+              <div class="related-content-card__meta">
+                {% if article.publishedAt %}
+                  <time datetime="{{ article.publishedAt }}">
+                    {{ article.publishedAt | date('DD.MM.YYYY') }}
+                  </time>
+                {% endif %}
+
+                <a href="{{ article._url }}" class="related-content-card__link">
+                  Читать далее →
+                </a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+    {% elif displayStyle == 'grid' %}
+      <div class="related-content-widget__grid">
+        {% for article in manualSelection.slice(0, maxItems) %}
+          <article class="related-content-grid-item">
+            {% if showImages and article.featuredImage and article.featuredImage.length > 0 %}
+              <div class="related-content-grid-item__image">
+                <a href="{{ article._url }}">
+                  <img src="{{ apos.attachment.url(article.featuredImage[0], { size: 'one-sixth' }) }}"
+                       alt="{{ article.title }}"
+                       loading="lazy">
+                </a>
+              </div>
+            {% endif %}
+
+            <h3 class="related-content-grid-item__title">
+              <a href="{{ article._url }}">{{ article.title }}</a>
+            </h3>
+
+            {% if showExcerpt and article.description %}
+              <p class="related-content-grid-item__excerpt">{{ article.description | truncate(100) }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      {# List style #}
+      <ul class="related-content-widget__list">
+        {% for article in manualSelection.slice(0, maxItems) %}
+          <li class="related-content-list-item">
+            <a href="{{ article._url }}" class="related-content-list-item__link">
+              <span class="related-content-list-item__icon">📄</span>
+              <span class="related-content-list-item__title">{{ article.title }}</span>
+            </a>
+
+            {% if article.publishedAt %}
+              <time class="related-content-list-item__date" datetime="{{ article.publishedAt }}">
+                {{ article.publishedAt | date('DD.MM.YYYY') }}
+              </time>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,0 +1,139 @@
+{# FAQ Generator Widget Template #}
+
+{% set title = data.widget.title or 'Часто задаваемые вопросы' %}
+{% set faqItems = data.widget.faqItems or [] %}
+{% set autoGenerate = data.widget.autoGenerate %}
+{% set maxQuestions = data.widget.maxQuestions or 5 %}
+{% set displayStyle = data.widget.displayStyle or 'accordion' %}
+{% set showSchema = data.widget.showSchema %}
+
+{# Auto-generate mode with HTMX #}
+{% if autoGenerate and faqItems.length == 0 %}
+  {% set currentPage = data.page %}
+  {% set currentPiece = data.piece %}
+
+  {% if currentPiece or (currentPage and currentPage.type == 'article') %}
+    {% set articleId = currentPiece._id if currentPiece else currentPage._id %}
+
+    <div class="faq-generator-container"
+         hx-post="/api/faq/render"
+         hx-trigger="load"
+         hx-vals='{"articleId": "{{ articleId }}", "maxQuestions": {{ maxQuestions }}, "displayStyle": "{{ displayStyle }}", "title": "{{ title }}"}'
+         hx-swap="innerHTML">
+
+      {# Loader #}
+      <div class="faq-generator__loader">
+        <div class="spinner"></div>
+        <p>Генерируем FAQ с помощью AI...</p>
+      </div>
+    </div>
+
+  {% else %}
+    <div class="faq-generator__empty">
+      <p style="color: #999; font-style: italic;">FAQ можно автогенерировать только на страницах статей</p>
+    </div>
+  {% endif %}
+
+{# Manual mode with predefined FAQ items #}
+{% elif faqItems.length > 0 %}
+  <div class="faq-generator faq-generator--{{ displayStyle }}">
+    <h2 class="faq-generator__title">{{ title }}</h2>
+
+    {% if displayStyle == 'accordion' %}
+      {# Accordion Style #}
+      <div class="faq-accordion">
+        {% for item in faqItems %}
+          {% set itemId = 'faq-item-' + loop.index %}
+
+          <div class="faq-accordion__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <button class="faq-accordion__question"
+                    aria-expanded="false"
+                    aria-controls="{{ itemId }}"
+                    onclick="this.classList.toggle('active'); this.setAttribute('aria-expanded', this.classList.contains('active')); document.getElementById('{{ itemId }}').classList.toggle('active');">
+              <span class="faq-accordion__question-icon">❓</span>
+              <span class="faq-accordion__question-text" itemprop="name">{{ item.question }}</span>
+              <span class="faq-accordion__toggle">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+
+            <div class="faq-accordion__answer" id="{{ itemId }}" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <div itemprop="text">
+                {% area item, 'answer' %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% elif displayStyle == 'cards' %}
+      {# Cards Style #}
+      <div class="faq-cards">
+        {% for item in faqItems %}
+          <div class="faq-card" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <div class="faq-card__icon">❓</div>
+            <div class="faq-card__content">
+              <h3 class="faq-card__question" itemprop="name">{{ item.question }}</h3>
+              <div class="faq-card__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <div itemprop="text">
+                  {% area item, 'answer' %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      {# List Style #}
+      <dl class="faq-list">
+        {% for item in faqItems %}
+          <div class="faq-list__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <dt class="faq-list__question">
+              <span class="faq-list__icon">Q:</span>
+              <span itemprop="name">{{ item.question }}</span>
+            </dt>
+            <dd class="faq-list__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <span class="faq-list__icon">A:</span>
+              <div itemprop="text">
+                {% area item, 'answer' %}
+              </div>
+            </dd>
+          </div>
+        {% endfor %}
+      </dl>
+    {% endif %}
+
+    {# Schema.org FAQPage markup #}
+    {% if showSchema and faqItems.length > 0 %}
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {% for item in faqItems %}
+          {
+            "@type": "Question",
+            "name": {{ item.question | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ (item.answer.items[0].content if item.answer.items[0] else item.question) | striptags | json }}
+            }
+          }{% if not loop.last %},{% endif %}
+          {% endfor %}
+        ]
+      }
+      </script>
+    {% endif %}
+  </div>
+
+{% else %}
+  {# No FAQ items and not auto-generate #}
+  <div class="faq-generator__empty">
+    <p style="color: #999; font-style: italic;">
+      Настройте FAQ вопросы в виджете или включите автогенерацию
+    </p>
+  </div>
+{% endif %}

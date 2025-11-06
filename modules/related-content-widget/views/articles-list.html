@@ -1,0 +1,86 @@
+{# Partial template for HTMX response with related articles #}
+
+{% macro renderCards(articles, showExcerpt, showImages) %}
+  <div class="related-content-widget__cards">
+    {% for article in articles %}
+      <article class="related-content-card">
+        {% if showImages and article.imageUrl %}
+          <div class="related-content-card__image">
+            <a href="{{ article.url }}">
+              <img src="{{ article.imageUrl }}"
+                   alt="{{ article.title }}"
+                   loading="lazy">
+            </a>
+          </div>
+        {% endif %}
+
+        <div class="related-content-card__content">
+          <h3 class="related-content-card__title">
+            <a href="{{ article.url }}">{{ article.title }}</a>
+          </h3>
+
+          {% if showExcerpt and article.excerpt %}
+            <p class="related-content-card__excerpt">{{ article.excerpt }}</p>
+          {% endif %}
+
+          <div class="related-content-card__meta">
+            {% if article.publishedAt %}
+              <time datetime="{{ article.publishedAt }}">
+                {{ article.publishedAt | date('DD.MM.YYYY') }}
+              </time>
+            {% endif %}
+
+            <a href="{{ article.url }}" class="related-content-card__link">
+              Читать далее →
+            </a>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro renderGrid(articles, showExcerpt, showImages) %}
+  <div class="related-content-widget__grid">
+    {% for article in articles %}
+      <article class="related-content-grid-item">
+        {% if showImages and article.imageUrl %}
+          <div class="related-content-grid-item__image">
+            <a href="{{ article.url }}">
+              <img src="{{ article.imageUrl }}"
+                   alt="{{ article.title }}"
+                   loading="lazy">
+            </a>
+          </div>
+        {% endif %}
+
+        <h3 class="related-content-grid-item__title">
+          <a href="{{ article.url }}">{{ article.title }}</a>
+        </h3>
+
+        {% if showExcerpt and article.excerpt %}
+          <p class="related-content-grid-item__excerpt">{{ article.excerpt | truncate(100) }}</p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro renderList(articles) %}
+  <ul class="related-content-widget__list">
+    {% for article in articles %}
+      <li class="related-content-list-item">
+        <a href="{{ article.url }}" class="related-content-list-item__link">
+          <span class="related-content-list-item__icon">📄</span>
+          <span class="related-content-list-item__title">{{ article.title }}</span>
+        </a>
+
+        {% if article.publishedAt %}
+          <time class="related-content-list-item__date" datetime="{{ article.publishedAt }}">
+            {{ article.publishedAt | date('DD.MM.YYYY') }}
+          </time>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
