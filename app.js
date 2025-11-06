@@ -68,6 +68,11 @@ require('apostrophe')({
     'faq-generator': {},
     // Intelligent Search with AI hints
     'intelligent-search': {},
+    // ========================================
+    // APOSTROPHE PRO FEATURES
+    // ========================================
+    // Advanced Permissions - granular access control
+    'advanced-permissions': {},
     article: {},
     // Tease an article on any page
     'article-widget': {},
