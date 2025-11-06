@@ -1,0 +1,135 @@
+{% if data.widget._error %}
+  <div class="data-set-error" style="padding: 20px; background: #fee; border: 1px solid #fcc; border-radius: 4px; color: #c00;">
+    <strong>Error:</strong> {{ data.widget._error }}
+  </div>
+{% elif data.widget._dataset %}
+  <div class="data-set-widget" data-dataset-id="{{ data.widget.datasetId }}" data-visualization="{{ data.widget.visualizationType }}">
+
+    {% if data.widget.chartTitle %}
+      <h3 class="data-set-title">{{ data.widget.chartTitle }}</h3>
+    {% endif %}
+
+    {% if data.widget.visualizationType == 'table' %}
+      <!-- TABLE VIEW -->
+      <div class="data-set-table-container">
+        {% if data.widget.showSearch %}
+          <div class="data-set-search" style="margin-bottom: 15px;">
+            <input type="text"
+                   class="data-set-search-input"
+                   placeholder="Search..."
+                   style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; max-width: 400px;">
+          </div>
+        {% endif %}
+
+        {% if data.widget._records.length > 0 %}
+          <div style="overflow-x: auto;">
+            <table class="data-set-table" style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+              <thead>
+                <tr style="background: #f5f5f5;">
+                  {% for field, schema in data.widget._dataset.schema %}
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: left; font-weight: 600;">
+                      {{ schema.label or field }}
+                    </th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for record in data.widget._records %}
+                  <tr style="border-bottom: 1px solid #eee;">
+                    {% for field, schema in data.widget._dataset.schema %}
+                      <td style="padding: 10px; border: 1px solid #ddd;">
+                        {{ record.data[field] or '-' }}
+                      </td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          {% if data.widget.showPagination and data.widget._pagination %}
+            <div class="data-set-pagination" style="margin-top: 20px; text-align: center;">
+              <p>
+                Showing {{ data.widget._records.length }} of {{ data.widget._pagination.totalRecords }} records
+                (Page {{ data.widget._pagination.page }} of {{ data.widget._pagination.totalPages }})
+              </p>
+              <div class="pagination-controls" style="margin-top: 10px;">
+                {% if data.widget._pagination.page > 1 %}
+                  <button class="btn-pagination" data-page="{{ data.widget._pagination.page - 1 }}"
+                          style="padding: 8px 16px; margin: 0 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Previous
+                  </button>
+                {% endif %}
+                {% if data.widget._pagination.page < data.widget._pagination.totalPages %}
+                  <button class="btn-pagination" data-page="{{ data.widget._pagination.page + 1 }}"
+                          style="padding: 8px 16px; margin: 0 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Next
+                  </button>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% else %}
+          <p style="padding: 20px; text-align: center; color: #999;">No data available</p>
+        {% endif %}
+      </div>
+
+    {% elif data.widget.visualizationType in ['bar', 'line', 'pie'] %}
+      <!-- CHART VIEW -->
+      <div class="data-set-chart-container">
+        <canvas id="chart-{{ data.widget._id }}"
+                data-chart-type="{{ data.widget.visualizationType }}"
+                data-x-field="{{ data.widget.chartXAxis }}"
+                data-y-field="{{ data.widget.chartYAxis }}"
+                style="max-height: 400px;"></canvas>
+      </div>
+
+      <!-- Pass data to JavaScript -->
+      <script>
+        window.datasetChartData = window.datasetChartData || {};
+        window.datasetChartData['{{ data.widget._id }}'] = {
+          records: {{ data.widget._records | dump | safe }},
+          schema: {{ data.widget._dataset.schema | dump | safe }},
+          xField: '{{ data.widget.chartXAxis }}',
+          yField: '{{ data.widget.chartYAxis }}',
+          chartType: '{{ data.widget.visualizationType }}'
+        };
+      </script>
+
+    {% elif data.widget.visualizationType == 'map' %}
+      <!-- MAP VIEW -->
+      <div class="data-set-map-container">
+        <div id="map-{{ data.widget._id }}"
+             data-lat-field="{{ data.widget.mapLatField }}"
+             data-lon-field="{{ data.widget.mapLonField }}"
+             data-label-field="{{ data.widget.mapLabelField }}"
+             style="height: 500px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"></div>
+      </div>
+
+      <!-- Pass data to JavaScript -->
+      <script>
+        window.datasetMapData = window.datasetMapData || {};
+        window.datasetMapData['{{ data.widget._id }}'] = {
+          records: {{ data.widget._records | dump | safe }},
+          latField: '{{ data.widget.mapLatField }}',
+          lonField: '{{ data.widget.mapLonField }}',
+          labelField: '{{ data.widget.mapLabelField }}'
+        };
+      </script>
+    {% endif %}
+
+  </div>
+
+  <!-- Load libraries for visualizations -->
+  {% if data.widget.visualizationType in ['bar', 'line', 'pie'] %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  {% elif data.widget.visualizationType == 'map' %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  {% endif %}
+
+{% else %}
+  <div class="data-set-empty" style="padding: 20px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 4px; text-align: center; color: #999;">
+    <p>Dataset not configured or not found</p>
+  </div>
+{% endif %}

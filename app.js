@@ -79,6 +79,11 @@ require('apostrophe')({
     'document-versions': {},
     // Template Library - content templates
     'template-library': {},
+    // Signup - user registration with email verification
+    'signup': {},
+    // Data Set - CSV import and visualization
+    'data-set': {},
+    'data-set-widget': {},
     article: {},
     // Tease an article on any page
     'article-widget': {},
